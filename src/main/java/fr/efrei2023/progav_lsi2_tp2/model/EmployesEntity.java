@@ -3,7 +3,7 @@ package fr.efrei2023.progav_lsi2_tp2.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "employes", schema = "employes")
+@Table(name = "employes", schema = "employees")
 public class EmployesEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id

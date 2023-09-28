@@ -7,9 +7,10 @@
 
         <class>fr.efrei2023.progav_lsi2_tp2.model.EmployesEntity</class>
         <properties>
-            <property name="eclipselink.jdbc.url" value="jdbc:mysql://localhost:3306/employes"/>
+            <property name="eclipselink.jdbc.url" value="jdbc:mysql://localhost:3306/employees"/>
             <property name="eclipselink.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
             <property name="eclipselink.jdbc.user" value="root"/>
+            <property name="eclipselink.jdbc.password" value="root"/>
         </properties>
     </persistence-unit>
 </persistence>
