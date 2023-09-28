@@ -3,12 +3,9 @@ package fr.efrei2023.progav_lsi2_tp2;
 import java.io.*;
 import java.util.List;
 
-import fr.efrei2023.progav_lsi2_tp2.model.EmployesEntity;
-import fr.efrei2023.progav_lsi2_tp2.model.EmployesSessionBean;
 import jakarta.ejb.EJB;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.*;
-import jakarta.servlet.annotation.*;
 
 //@WebServlet(name = "helloServlet", value = "/hello-servlet")
 public class HelloServlet extends HttpServlet {
