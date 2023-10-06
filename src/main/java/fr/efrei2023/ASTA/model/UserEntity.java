@@ -16,6 +16,9 @@ public class UserEntity {
     @Column(name = "first_name")
     private String firstName;
     @Basic
+    @Column(name = "mdp")
+    private String mdp;
+    @Basic
     @Column(name = "phone")
     private String phone;
     @Basic
@@ -24,6 +27,9 @@ public class UserEntity {
     @Basic
     @Column(name = "type")
     private String type;
+    @Basic
+    @Column(name = "is_active")
+    private boolean isActive;
     @Basic
     @Column(name = "id_1")
     private int id1;
@@ -54,6 +60,13 @@ public class UserEntity {
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
+    public String getMdp() {
+        return mdp;
+    }
+
+    public void setMdp(String mdp) {
+        this.mdp = mdp;
+    }
 
     public String getPhone() {
         return phone;
@@ -77,6 +90,13 @@ public class UserEntity {
 
     public void setType(String type) {
         this.type = type;
+    }
+    public boolean getIsActive() {
+        return isActive;
+    }
+
+    public void setIsActive(boolean isActive) {
+        this.isActive = isActive;
     }
 
     public int getId1() {
