@@ -5,9 +5,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>fr.efrei2023</groupId>
-    <artifactId>ProgAv_LSI2_TP2</artifactId>
+    <artifactId>ASTA</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <name>ProgAv_LSI2_TP2</name>
+    <name>ASTA</name>
     <packaging>war</packaging>
 
     <properties>
@@ -59,7 +59,7 @@
     </dependencies>
 
     <build>
-        <finalName>TP2</finalName>
+        <finalName>ASTA</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

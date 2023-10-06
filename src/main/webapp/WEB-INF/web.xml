@@ -7,7 +7,7 @@
 
     <servlet>
         <servlet-name>helloServlet</servlet-name>
-        <servlet-class>fr.efrei2023.progav_lsi2_tp2.HelloServlet</servlet-class>
+        <servlet-class>fr.efrei2023.ASTA.HelloServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
