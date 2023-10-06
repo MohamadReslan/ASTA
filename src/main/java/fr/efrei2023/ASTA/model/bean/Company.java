@@ -1,4 +1,4 @@
-package fr.efrei2023.ASTA.model;
+package fr.efrei2023.ASTA.model.bean;
 
 public class Company {
     private int id;

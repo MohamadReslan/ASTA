@@ -11,6 +11,9 @@ import java.util.List;
 @Stateless
 public class EmployesSessionBean {
 
+
+
+
     EntityManagerFactory entityManagerFactory = EntityManagerFactoryUtil.getEntityManagerFactory();
     EntityManager em = entityManagerFactory.createEntityManager();
 

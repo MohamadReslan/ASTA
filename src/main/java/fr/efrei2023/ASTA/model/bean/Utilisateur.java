@@ -1,4 +1,4 @@
-package fr.efrei2023.ASTA.model;
+package fr.efrei2023.ASTA.model.bean;
 
 public class Utilisateur {
 
@@ -6,7 +6,7 @@ public class Utilisateur {
     private String motDePasseSaisi;
 
     // New
-    private int id;
+    private int id; //coucou maximussss
     private String lastName;
     private String firstName;
     private String phone;
