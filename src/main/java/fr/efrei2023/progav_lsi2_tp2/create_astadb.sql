@@ -10,10 +10,22 @@ DROP TABLE IF EXISTS MISSION;
 CREATE TABLE PROGRAM(
     id INT,
     label VARCHAR(50),
-    diploma_year DATE,
+    diploma_year VARCHAR(50),
     major VARCHAR(50),
     PRIMARY KEY(id)
 );
+
+INSERT INTO PROGRAM VALUES (1, 'L1', '2020-2025', ''),
+                           (2, 'L1', '2021-2026', ''),
+                           (3, 'L2', '2018-2022', ''),
+                           (4, 'L3-LSI', '2020-2025', ''),
+                           (5, 'L3-RS', '2019-2024', ''),
+                           (6, 'L3-DATA', '2019-2024', ''),
+                           (7, 'L3-DATA', '2020-2025', ''),
+                           (8, 'M1-LSI', '2022-2027', ''),
+                           (9, 'M2-DATA', '2019-2024', 'Software engineer'),
+                           (10, 'M2-RS', '2020-2025', 'Digital transformation'),
+                           (11, 'M2-LSI', '2020-2025', 'Management');
 
 CREATE TABLE COMPANY(
     id INT,
@@ -23,6 +35,13 @@ CREATE TABLE COMPANY(
     PRIMARY KEY(id)
 );
 
+INSERT INTO COMPANY VALUES (1, 'Bouygues', '10 rue du chaperon vert PARIS 75015', 'Batiment A - étage 3'),
+                           (2, 'Crédit agricole', '50 avenue du parc PARIS 75008', 'Badge'),
+                           (3, 'Dassault System', '30 boulevard du maine PARIS 75018', 'Pièce d\'idendentité'),
+                           (4, 'Karyon', '5 rue de la plaine  PARIS 75010', 'Interphone code 98532'),
+                           (5, 'Clever age', '32 rue blanche PARIS 75002', 'Badge'),
+                           (6, 'Gudule', '96 rue le dantec PARIS 75013', 'Porte 3');
+
 CREATE TABLE USER(
     id SMALLINT,
     last_name VARCHAR(50),
@@ -30,12 +49,33 @@ CREATE TABLE USER(
     phone VARCHAR(50),
     mail VARCHAR(50),
     type VARCHAR(50),
-    id_1 INT NOT NULL,
-    id_2 INT NOT NULL,
+    id_1 INT NULL,
+    id_2 INT NULL,
     PRIMARY KEY(id),
     FOREIGN KEY(id_1) REFERENCES COMPANY(id),
     FOREIGN KEY(id_2) REFERENCES PROGRAM(id)
 );
+
+INSERT INTO USER VALUES (1, 'Bond', 'James', '0623412152', 'jbond@gmail.com', 'apprenti', 1, 1),
+                        (2, 'Martin', 'Sophie', '0612345678', 'sophie.martin@gmail.com', 'apprenti', 2, 2),
+                        (3, 'Lefebvre', 'Luc', '0345678912', 'luc.lefebvre@gmail.com', 'maitre apprenti', 3, 3),
+                        (4, 'Dubois', 'Isabelle', '0456789012', 'isabelle.dubois@gmail.com', 'apprenti', 4, 4),
+                        (5, 'Bertrand', 'Antoine', '0234567890', 'antoine.bertrand@gmail.com', 'apprenti', 5, 5),
+                        (6, 'Girard', 'Élise', '0678901234', 'elise.girard@gmail.com', 'maitre apprenti', 6, 6),
+                        (7, 'Roux', 'Thierry', '0789012345', 'thierry.roux@gmail.com', 'apprenti', 1, 7),
+                        (8, 'Leroy', 'Nathalie', '0212345678', 'nathalie.leroy@gmail.com', 'apprenti', 2, 8),
+                        (9, 'Petit', 'Lucas', '0567890123', 'lucas.petit@gmail.com', 'maitre apprenti', 3, 9),
+                        (10, 'Moreau', 'Marie', '0345678901', 'marie.moreau@gmail.com', 'apprenti', 4, 10),
+                        (11, 'Fontaine', 'Philippe', '0789012345', 'philippe.fontaine@gmail.com', 'maitre apprentissage', 5, NULL),
+                        (12, 'Marchand', 'Claire', '0123456789', 'claire.marchand@gmail.com', 'maitre apprentissage', 6, NULL),
+                        (13, 'Boucher', 'François', '0456789012', 'francois.boucher@gmail.com', 'maitre apprentissage', 1, NULL),
+                        (14, 'Chevalier', 'Julie', '0234567890', 'julie.chevalier@gmail.com', 'maitre apprentissage', 2, NULL),
+                        (15, 'Gauthier', 'Éric', '0678901234', 'eric.gauthier@gmail.com', 'maitre apprentissage', 3, NULL),
+                        (16, 'Caron', 'Catherine', '0789012345', 'catherine.caron@gmail.com', 'tuteur', NULL, NULL),
+                        (17, 'Renaud', 'Thomas', '0567890123', 'thomas.renaud@gmail.com', 'tuteur', NULL, NULL),
+                        (18, 'Fournier', 'Marie', '0345678901', 'marie.fournier@gmail.com', 'tuteur', NULL, NULL),
+                        (19, 'Lemoine', 'François', '0123456789', 'francois.lemoine@gmail.com', 'tuteur', NULL, NULL),
+                        (20, 'Dupont', 'Pierre', '0123456789', 'pierre.dupont@gmail.com', 'tuteur', NULL, NULL);
 
 CREATE TABLE EVALUATION(
     id INT,
