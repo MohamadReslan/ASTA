@@ -7,13 +7,33 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%
+    session = request.getSession(false);
+    if (session != null) {
+        System.out.println("not null");
+%>
 <html>
-<head>
-    <title>ALTN72 - Liste des employés </title>
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-   <!--  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>  -->
-</head>
+<head></head>
 <body>
     <h3> Bonjour ${ utilisateur.loginSaisi } !</h3>
 </body>
 </html>
+<%  session.invalidate();
+    } else {
+        System.out.println("OK");
+
+        response.sendRedirect("http://www.google.com");
+    }
+%>
+
+
+
+
+
+
+
+
+
+
+
+

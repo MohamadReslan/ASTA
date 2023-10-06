@@ -27,7 +27,6 @@
                                 <div class="form-group">
                                     <input class="form-control" placeholder="Mot de passe" name="champMotDePasse" type="password">
                                 </div>
-
                                 <input type="submit" name="action" value="Login" class="btn btn-primary"/>
                             </fieldset>
                         </form>

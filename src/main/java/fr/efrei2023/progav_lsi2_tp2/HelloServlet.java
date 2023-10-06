@@ -12,7 +12,7 @@ import jakarta.servlet.annotation.*;
 
 //@WebServlet(name = "helloServlet", value = "/hello-servlet")
 public class HelloServlet extends HttpServlet {
-
+    HttpSession session;
     @EJB
     private EmployesSessionBean employesSessionBean;
     Utilisateur unUtilisateur;
@@ -23,13 +23,15 @@ public class HelloServlet extends HttpServlet {
 
     public void processRequest (HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         // Les données saisies par l'utilisateur sont placées dans le contexte
+        session = request.getSession();
+
         placerUtilisateurDansContexte(request);
 
         // Récupération de la liste de tous les employés via notre service getTousLesEmployes()
         List<EmployesEntity> tousLesEmployees = employesSessionBean.getTousLesEmployes();
 
         // Je mets la liste dans l'objet request afin qu'il soit accessible dans les autres couches, notamment la Vue
-        request.setAttribute("tousLesEmployes", tousLesEmployees);
+        session.setAttribute("tousLesEmployes", tousLesEmployees);
 
         aiguillerVersLaProchainePage(request, response);
     }
@@ -43,21 +45,26 @@ public class HelloServlet extends HttpServlet {
     public void placerUtilisateurDansContexte(HttpServletRequest request){
         unUtilisateur = new Utilisateur();
 
+        String champLogin = request.getParameter("champLogin");
+        String champMotDePasse = request.getParameter("champMotDePasse");
+
         unUtilisateur.setLoginSaisi(request.getParameter("champLogin"));
         unUtilisateur.setMotDePasseSaisi(request.getParameter("champMotDePasse"));
 
-        request.setAttribute("utilisateur", unUtilisateur);
+        session.setAttribute("champLogin",champLogin);
+        session.setAttribute("champMotDePasse",champMotDePasse);
+
+        session.setAttribute("utilisateur", unUtilisateur);
     }
 
     public void aiguillerVersLaProchainePage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if (verifierInfosConnexion(unUtilisateur )){
             request.getRequestDispatcher("bienvenue.jsp").forward(request, response);
-        }else{
+        } else{
             request.setAttribute("messageErreur", MESSAGE_ERREUR_CREDENTIALS_KO);
             request.getRequestDispatcher("index.jsp").forward(request, response);
         }
     }
-
     public void init() {
     }
 
