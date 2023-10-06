@@ -1,4 +1,4 @@
-package fr.efrei2023.ASTA;
+package fr.efrei2023.ASTA.model;
 
 import java.util.Date;
 

@@ -5,7 +5,7 @@ import jakarta.persistence.Persistence;
 
 public class EntityManagerFactoryUtil {
 
-    private static final String PERSISTENCE_UNIT_NAME = "TP2_PU"; // Nom de l'unité de persistance
+    private static final String PERSISTENCE_UNIT_NAME = "ASTA_DB"; // Nom de l'unité de persistance
 
     private static EntityManagerFactory entityManagerFactory;
 
