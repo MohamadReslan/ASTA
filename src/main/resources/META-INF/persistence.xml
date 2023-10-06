@@ -5,11 +5,11 @@
              version="3.0">
     <persistence-unit name="ASTA_DB">
 
-        <class>fr.efrei2023.ASTA.model.CompanyEntity</class>
-        <class>fr.efrei2023.ASTA.model.MissionEntity</class>
-        <class>fr.efrei2023.ASTA.model.EvaluationEntity</class>
-        <class>fr.efrei2023.ASTA.model.ProgramEntity</class>
-        <class>fr.efrei2023.ASTA.model.UserEntity</class>
+        <class>fr.efrei2023.ASTA.model.entity.CompanyEntity</class>
+        <class>fr.efrei2023.ASTA.model.entity.MissionEntity</class>
+        <class>fr.efrei2023.ASTA.model.entity.EvaluationEntity</class>
+        <class>fr.efrei2023.ASTA.model.entity.ProgramEntity</class>
+        <class>fr.efrei2023.ASTA.model.entity.UserEntity</class>
         <properties>
             <property name="eclipselink.jdbc.url" value="jdbc:mysql://localhost:3306/asta"/>
             <property name="eclipselink.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>

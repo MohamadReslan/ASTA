@@ -1,5 +1,6 @@
-package fr.efrei2023.ASTA.model;
+package fr.efrei2023.ASTA.model.sessionbean;
 
+import fr.efrei2023.ASTA.model.entity.EmployesEntity;
 import fr.efrei2023.ASTA.utils.EntityManagerFactoryUtil;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.*;

@@ -3,8 +3,9 @@ package fr.efrei2023.ASTA;
 import java.io.*;
 import java.util.List;
 
-import fr.efrei2023.ASTA.model.EmployesEntity;
-import fr.efrei2023.ASTA.model.EmployesSessionBean;
+import fr.efrei2023.ASTA.model.Utilisateur;
+import fr.efrei2023.ASTA.model.entity.EmployesEntity;
+import fr.efrei2023.ASTA.model.sessionbean.EmployesSessionBean;
 import jakarta.ejb.EJB;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;

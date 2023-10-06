@@ -1,4 +1,4 @@
-package fr.efrei2023.ASTA;
+package fr.efrei2023.ASTA.model;
 
 
 public class Mission {
