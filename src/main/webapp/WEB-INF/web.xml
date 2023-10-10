@@ -6,13 +6,13 @@
 
 
     <servlet>
-        <servlet-name>helloServlet</servlet-name>
-        <servlet-class>fr.efrei2023.ASTA.HelloServlet</servlet-class>
+        <servlet-name>userController</servlet-name>
+        <servlet-class>fr.efrei2023.ASTA.controller.UserController</servlet-class>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>helloServlet</servlet-name>
-        <url-pattern>/hello-servlet</url-pattern>
+        <servlet-name>userController</servlet-name>
+        <url-pattern>/user-controller</url-pattern>
     </servlet-mapping>
 
 

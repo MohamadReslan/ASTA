@@ -12,14 +12,14 @@
         <div class="container" style="margin-top:30px">
             <div class="col-md-4">
                 <div style="color:red">
-                    ${messageErreur}
+                    ${errorMessage}
                 </div>
                 <div class="login-panel panel panel-default">
                     <div class="panel-heading">
                         <h3 class="panel-title">Login</h3>
                     </div>
                     <div class="panel-body">
-                        <form action="hello-servlet" method="post">
+                        <form action="user-controller" method="post">
                             <fieldset>
                                 <div class="form-group">
                                     <input class="form-control" placeholder="Login" name="champLogin" autofocus="">

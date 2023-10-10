@@ -1,6 +1,6 @@
 package fr.efrei2023.ASTA.model.bean;
 
-public class Utilisateur {
+public class User {
 
     private String loginSaisi;
     private String motDePasseSaisi;
