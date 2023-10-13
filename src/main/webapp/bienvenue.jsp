@@ -14,6 +14,6 @@
    <!--  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>  -->
 </head>
 <body>
-    <h3> Bonjour ${ utilisateur.loginSaisi } !</h3>
+    <h3> Bonjour ${ utilisateur.firstName } !</h3>
 </body>
 </html>
