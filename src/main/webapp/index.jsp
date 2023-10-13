@@ -10,14 +10,14 @@
         <section class="row d-flex justify-content-center" style="background-color: #508bfc;width: 100%;height: 100%">
             <div class="container py-5 h-100">
                 <div class="row d-flex justify-content-center align-items-center h-100">
-                    <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                    <div>
                         <div class="card shadow-2-strong" style="border-radius: 1rem;">
                             <div class="p-5 text-center" style="">
                                 <h3 class="mb-5">Connectez-vous</h3>
                                 <form class="row d-flex justify-content-center text-center" action="user-controller" method="post">
                                     <fieldset>
                                         <div class="form-group">
-                                            <input class="form-control" placeholder="Login" name="champLogin" autofocus="">
+                                            <input class="form-control" placeholder="Login" name="champLogin" autofocus>
                                         </div>
                                         <div class="form-group">
                                             <input class="form-control" placeholder="Mot de passe" name="champMotDePasse" type="password">
