@@ -26,11 +26,11 @@ public class UserController extends HttpServlet {
             case "Login":
                 if(checkUserConnection()){ // if good dispatch new page
                     // get info of all users
-                    List<UserEntity> allUsers = userSessionBean.getAllUsers();
+                    List<UserEntity> allUsers = userSessionBean.getAllRelatedUsersByUser(16);
                     request.setAttribute("allUsers", allUsers);
 
                     // get info of connected user
-                    UserEntity userConnected = userSessionBean.getUserById(1);
+                    UserEntity userConnected = userSessionBean.getUserById(16);
                     request.setAttribute("userConnected", userConnected);
                     request.getRequestDispatcher("users.jsp").forward(request, response);
                 }//rajouter une condtion pour differencier etudiant et admin

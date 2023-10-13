@@ -18,6 +18,11 @@ public class UserSessionBean {
         return  q.getResultList();
     }
 
+    public List<UserEntity> getAllRelatedUsersByUser(int userId) {
+        Query q = em.createQuery("SELECT u FROM UserEntity u WHERE u.relatedUserId = :id").setParameter("id", userId);
+        return  q.getResultList();
+    }
+
     public UserEntity getUserById(int userId) {
         Query q = em.createQuery("SELECT u FROM UserEntity u WHERE u.id = :id").setParameter("id", userId);
         return (UserEntity) q.getSingleResult();
