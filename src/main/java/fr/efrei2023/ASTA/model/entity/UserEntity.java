@@ -3,7 +3,7 @@ package fr.efrei2023.ASTA.model.entity;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "user", schema = "asta", catalog = "")
+@Table(name = "user", schema = "astadb", catalog = "")
 public class UserEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -31,11 +31,11 @@ public class UserEntity {
     @Column(name = "is_active")
     private boolean isActive;
     @Basic
-    @Column(name = "id_1")
-    private int id1;
+    @Column(name = "company_id")
+    private int companyId;
     @Basic
-    @Column(name = "id_2")
-    private int id2;
+    @Column(name = "program_id")
+    private int programId;
 
     public short getId() {
         return id;
@@ -99,20 +99,20 @@ public class UserEntity {
         this.isActive = isActive;
     }
 
-    public int getId1() {
-        return id1;
+    public int getCompanyId() {
+        return companyId;
     }
 
-    public void setId1(int id1) {
-        this.id1 = id1;
+    public void setCompanyId(int companyId) {
+        this.companyId = companyId;
     }
 
-    public int getId2() {
-        return id2;
+    public int getProgramId() {
+        return programId;
     }
 
-    public void setId2(int id2) {
-        this.id2 = id2;
+    public void setProgramId(int programId) {
+        this.programId = programId;
     }
 
     @Override
@@ -123,8 +123,8 @@ public class UserEntity {
         UserEntity that = (UserEntity) o;
 
         if (id != that.id) return false;
-        if (id1 != that.id1) return false;
-        if (id2 != that.id2) return false;
+        if (companyId != that.companyId) return false;
+        if (programId != that.programId) return false;
         if (lastName != null ? !lastName.equals(that.lastName) : that.lastName != null) return false;
         if (firstName != null ? !firstName.equals(that.firstName) : that.firstName != null) return false;
         if (phone != null ? !phone.equals(that.phone) : that.phone != null) return false;
@@ -142,8 +142,8 @@ public class UserEntity {
         result = 31 * result + (phone != null ? phone.hashCode() : 0);
         result = 31 * result + (mail != null ? mail.hashCode() : 0);
         result = 31 * result + (type != null ? type.hashCode() : 0);
-        result = 31 * result + id1;
-        result = 31 * result + id2;
+        result = 31 * result + companyId;
+        result = 31 * result + programId;
         return result;
     }
 }

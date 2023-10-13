@@ -3,7 +3,7 @@ package fr.efrei2023.ASTA.model.entity;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "company", schema = "asta", catalog = "")
+@Table(name = "company", schema = "astadb", catalog = "")
 public class CompanyEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id

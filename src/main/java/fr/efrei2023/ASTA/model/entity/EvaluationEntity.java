@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 import java.sql.Date;
 
 @Entity
-@Table(name = "evaluation", schema = "asta", catalog = "")
+@Table(name = "evaluation", schema = "astadb", catalog = "")
 public class EvaluationEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
