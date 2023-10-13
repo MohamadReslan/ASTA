@@ -3,37 +3,37 @@
 
 <html>
     <head>
-        <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-       <!-- <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>  -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
         <title>Jakarta EE - Login</title>
     </head>
-
     <body>
-        <div class="container" style="margin-top:30px">
-            <div class="col-md-4">
-                <div style="color:red">
-                    ${errorMessage}
-                </div>
-                <div class="login-panel panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">Login</h3>
-                    </div>
-                    <div class="panel-body">
-                        <form action="user-controller" method="post">
-                            <fieldset>
-                                <div class="form-group">
-                                    <input class="form-control" placeholder="Login" name="champLogin" autofocus="">
+        <section class="row d-flex justify-content-center" style="background-color: #508bfc;width: 100%;height: 100%">
+            <div class="container py-5 h-100">
+                <div class="row d-flex justify-content-center align-items-center h-100">
+                    <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                        <div class="card shadow-2-strong" style="border-radius: 1rem;">
+                            <div class="p-5 text-center" style="">
+                                <h3 class="mb-5">Connectez-vous</h3>
+                                <form class="row d-flex justify-content-center text-center" action="user-controller" method="post">
+                                    <fieldset>
+                                        <div class="form-group">
+                                            <input class="form-control" placeholder="Login" name="champLogin" autofocus="">
+                                        </div>
+                                        <div class="form-group">
+                                            <input class="form-control" placeholder="Mot de passe" name="champMotDePasse" type="password">
+                                        </div>
+                                        <input style="margin-top: 2vh" type="submit" name="action" value="Connexion" class="btn btn-primary"/>
+                                    </fieldset>
+                                </form>
+                                </form>
+                                <div style="color:red">
+                                    ${errorMessage}
                                 </div>
-                                <div class="form-group">
-                                    <input class="form-control" placeholder="Mot de passe" name="champMotDePasse" type="password">
-                                </div>
-
-                                <input type="submit" name="action" value="Login" class="btn btn-primary"/>
-                            </fieldset>
-                        </form>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
     </body>
 </html>
