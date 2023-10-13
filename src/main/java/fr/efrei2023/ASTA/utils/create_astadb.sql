@@ -109,7 +109,7 @@ CREATE TABLE MISSION(
     id INT,
     keyword VARCHAR(50),
     job VARCHAR(50),
-    comment VARCHAR(50),
+    comment VARCHAR(500),
     id_1 SMALLINT NOT NULL,
     PRIMARY KEY(id),
     UNIQUE(id_1),
