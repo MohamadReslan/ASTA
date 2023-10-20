@@ -18,9 +18,12 @@ public class UserController extends HttpServlet {
     @EJB
     private UserSessionBean userSessionBean;
 
+    private List<UserEntity> allUsers;
     private UserEntity connectedUser = null;
     private List<UserEntity> allUsers;
     private final static String ERROR_MESSAGE = "Infos de connexion non valides. Merci de les saisir à nouveau.\n";
+
+    private final static String ERROR_MESSAGE_NO_USER_SELECT = "Veuillez séléctionnez un Apprenti.\n";
 
     public void processRequest(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         String action = request.getParameter("action");
@@ -38,7 +41,7 @@ public class UserController extends HttpServlet {
                     request.getRequestDispatcher("users.jsp").forward(request, response);
                 }
                 else if (checkUserConnection(request, response) && !isAdmin()) { // if good but no admin
-                    UserEntity userConnected = userSessionBean.getUserById(1);
+                    UserEntity userConnected = userSessionBean.getUserById(connectedUser.getId());
                     request.setAttribute("errorMessage", "");
                     request.setAttribute("utilisateur", userConnected);
                     request.getRequestDispatcher("bienvenue.jsp").forward(request,response);
@@ -62,6 +65,21 @@ public class UserController extends HttpServlet {
             case "Ajouter":
                 request.getRequestDispatcher("userAdd.jsp").forward(request, response);
                 break;
+            case "Supprimer":
+                String selectedUser = request.getParameter("idUser");
+                if(selectedUser != null){
+                    //userSessionBean.deleteApprentice(Integer.parseInt(selectedUser)); To delete User, change to archive a user
+                    request.setAttribute("errorNoUserSelected", "Bien vu bg");
+                    allUsers = userSessionBean.getAllRelatedUsersByUser(connectedUser.getId());
+                    request.setAttribute("allUsers", allUsers);
+                    request.getRequestDispatcher("users.jsp").forward(request, response);
+                }
+                else{
+                    request.setAttribute("errorNoUserSelected", ERROR_MESSAGE_NO_USER_SELECT);
+                    request.setAttribute("allUsers", allUsers);
+                    request.getRequestDispatcher("users.jsp").forward(request, response);
+                }
+                break;
             default:
                 request.setAttribute("errorMessage", "");
                 request.getRequestDispatcher("index.jsp").forward(request, response);
@@ -77,6 +95,7 @@ public class UserController extends HttpServlet {
         String mdp = request.getParameter("champMotDePasse");
 
         connectedUser = userSessionBean.getLoggedUser(login, mdp);
+        allUsers = userSessionBean.getAllRelatedUsersByUser(connectedUser.getId());
 
         return connectedUser != null;
     }
