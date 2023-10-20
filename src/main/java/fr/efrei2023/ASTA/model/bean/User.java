@@ -14,6 +14,7 @@ public class User {
     private String type;
     private int companyId;
     private int programId;
+    private int relatedUserId;
 
     public String getLoginSaisi() {
         return loginSaisi;

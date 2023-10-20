@@ -37,6 +37,10 @@ public class UserEntity {
     @Column(name = "program_id")
     private int programId;
 
+    @Basic
+    @Column(name = "related_user_id")
+    private int relatedUserId;
+
     public short getId() {
         return id;
     }
@@ -113,6 +117,14 @@ public class UserEntity {
 
     public void setProgramId(int programId) {
         this.programId = programId;
+    }
+
+    public int getRelatedUserId() {
+        return relatedUserId;
+    }
+
+    public void setRelatedUserId(int relatedUserId) {
+        this.relatedUserId = relatedUserId;
     }
 
     @Override

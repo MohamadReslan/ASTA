@@ -9,8 +9,5 @@
         <module name="ASTA" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="ProgAv_LSI2_TP2" target="11" />
-    </bytecodeTargetLevel>
   </component>
 </project>
