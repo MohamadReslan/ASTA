@@ -48,10 +48,13 @@ public class UserController extends HttpServlet {
                     request.getRequestDispatcher("index.jsp").forward(request, response);
                 }
                 break;
-
+            case "Ajouter":
+                request.getRequestDispatcher("userAdd.jsp").forward(request, response);
+                break;
             default:
                 request.setAttribute("errorMessage", "");
                 request.getRequestDispatcher("index.jsp").forward(request, response);
+
         }// completer par d'autre case pour tout ce qui touche au User (pas forcement dans la page login)
     }
 
