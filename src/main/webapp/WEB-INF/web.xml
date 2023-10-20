@@ -12,7 +12,7 @@
 
     <servlet-mapping>
         <servlet-name>userController</servlet-name>
-        <url-pattern>/user-controller</url-pattern>
+        <url-pattern>user-controller</url-pattern>
     </servlet-mapping>
 
 

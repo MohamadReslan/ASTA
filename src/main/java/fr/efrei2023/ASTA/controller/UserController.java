@@ -11,12 +11,16 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
-@WebServlet(name = "UserController", value = "/user-controller")
+@WebServlet("user-controller")
 public class UserController extends HttpServlet {
     @EJB
     private UserSessionBean userSessionBean;
+
+    private UserEntity connectedUser = null;
     private final static String ERROR_MESSAGE = "Infos de connexion non valides. Merci de les saisir à nouveau.\n";
 
     public void processRequest(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
@@ -24,26 +28,43 @@ public class UserController extends HttpServlet {
 
         switch(action){
             case "Login":
-                if(checkUserConnection()){ // if good dispatch new page
+                if(checkUserConnection(request, response) && isAdmin()){ // if good and admin dispatch new page
                     // get info of all users
-                    List<UserEntity> allUsers = userSessionBean.getAllRelatedUsersByUser(16);
+                    List<UserEntity> allUsers = userSessionBean.getAllRelatedUsersByUser(connectedUser.getId());
                     request.setAttribute("allUsers", allUsers);
 
                     // get info of connected user
-                    UserEntity userConnected = userSessionBean.getUserById(16);
-                    request.setAttribute("userConnected", userConnected);
+                    request.setAttribute("userConnected", connectedUser);
+                    request.setAttribute("errorMessage", "");
                     request.getRequestDispatcher("users.jsp").forward(request, response);
-                }//rajouter une condtion pour differencier etudiant et admin
-                else{
+                }
+                else if (checkUserConnection(request, response) && !isAdmin()) { // if good but no admin
+                    UserEntity userConnected = userSessionBean.getUserById(1);
+                    request.setAttribute("errorMessage", "");
+                    request.setAttribute("utilisateur", userConnected);
+                    request.getRequestDispatcher("bienvenue.jsp").forward(request,response);
+                } else{
                     request.setAttribute("errorMessage", ERROR_MESSAGE);
                     request.getRequestDispatcher("index.jsp").forward(request, response);
                 }
                 break;
+
+            default:
+                request.setAttribute("errorMessage", "");
+                request.getRequestDispatcher("index.jsp").forward(request, response);
         }// completer par d'autre case pour tout ce qui touche au User (pas forcement dans la page login)
     }
 
-    public boolean checkUserConnection(){ // ouais bastos c'est ton job
-        return true;
+    public boolean isAdmin(){
+        return Objects.equals(connectedUser.getType(), "tuteur");
+    }
+    public boolean checkUserConnection(HttpServletRequest request, HttpServletResponse response){
+        String login = request.getParameter("champLogin"); // = lastname
+        String mdp = request.getParameter("champMotDePasse");
+
+        connectedUser = userSessionBean.getLoggedUser(login, mdp);
+
+        return connectedUser != null;
     }
 
     public void init(){
@@ -53,7 +74,7 @@ public class UserController extends HttpServlet {
     }
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        processRequest(request, response);
+        request.getRequestDispatcher("index.jsp").forward(request, response);
     }
 
     public void doPost (HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
