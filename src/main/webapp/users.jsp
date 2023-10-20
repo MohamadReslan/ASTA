@@ -12,6 +12,7 @@
 <body>
 <h3>Bonjour ${userConnected.firstName} ${userConnected.lastName} !</h3>
 <div class="content m-16">
+    <form method="post" action="user-controller">
     <table id="table"
            data-toggle="table"
            data-height="460"
@@ -48,6 +49,8 @@
             </c:choose>
         </tbody>
     </table>
+    <input type="submit" name="action" value="Ajouter" class="btn btn-primary"/>
+    </form>
 </div>
 </body>
 </html>
