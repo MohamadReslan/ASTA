@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="astadb" uuid="32bce71e-47e6-4466-a18d-b73a16ce8cb1">
+    <data-source source="LOCAL" name="astadb" uuid="c8c790e3-5131-47c0-9f1d-e6c175f5473e">
       <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
