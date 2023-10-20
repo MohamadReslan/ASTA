@@ -38,4 +38,12 @@ public class UserSessionBean {
         Query q = em.createQuery("SELECT u FROM UserEntity u WHERE u.id = :id").setParameter("id", userId);
         return (UserEntity) q.getSingleResult();
     }
+
+    public void deleteApprentice(int userID){
+        em.getTransaction().begin();
+        Query q = em.createQuery("DELETE from UserEntity u WHERE u.id = :id");
+        q.setParameter("id", userID);
+        q.executeUpdate();
+        em.getTransaction().commit();
+    }
 }

@@ -49,7 +49,13 @@
             </c:choose>
         </tbody>
     </table>
-    <input type="submit" name="action" value="Ajouter" class="btn btn-primary"/>
+    <div>
+        <input type="submit" name="action" value="Ajouter" class="btn btn-primary"/>
+        <input type="submit" name="action" value="Supprimer" class="btn btn-primary"/>
+    </div>
+    <div style="color:red">
+        ${errorNoUserSelected}
+    </div>
     </form>
 </div>
 </body>
