@@ -22,7 +22,7 @@
                                         <div class="form-group">
                                             <input class="form-control" placeholder="Mot de passe" name="champMotDePasse" type="password">
                                         </div>
-                                        <input style="margin-top: 2vh" type="submit" name="action" value="Connexion" class="btn btn-primary"/>
+                                        <input type="submit" name="action" value="Connexion" class="btn btn-primary"/>
                                     </fieldset>
                                 </form>
                                 </form>
