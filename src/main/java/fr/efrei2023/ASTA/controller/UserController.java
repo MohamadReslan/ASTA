@@ -1,6 +1,5 @@
 package fr.efrei2023.ASTA.controller;
 
-import fr.efrei2023.ASTA.model.bean.User;
 import fr.efrei2023.ASTA.model.entity.UserEntity;
 import fr.efrei2023.ASTA.model.sessionbean.UserSessionBean;
 import jakarta.ejb.EJB;
@@ -11,7 +10,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -48,13 +46,21 @@ public class UserController extends HttpServlet {
                     request.getRequestDispatcher("index.jsp").forward(request, response);
                 }
                 break;
+            case "Archiver":
+                System.out.println("Click on Archiver !!");
+                int userId = Integer.parseInt(request.getParameter("userId"));
+
+                System.out.println("Archiving user with ID: " + userId);
+                userSessionBean.updateUserArchive(userId);
+
+                request.getRequestDispatcher("users.jsp").forward(request, response);
+                break;
             case "Ajouter":
                 request.getRequestDispatcher("userAdd.jsp").forward(request, response);
                 break;
             default:
                 request.setAttribute("errorMessage", "");
                 request.getRequestDispatcher("index.jsp").forward(request, response);
-
         }// completer par d'autre case pour tout ce qui touche au User (pas forcement dans la page login)
     }
 

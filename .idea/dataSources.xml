@@ -1,11 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
+<<<<<<< Updated upstream
     <data-source source="LOCAL" name="astadb" uuid="699be568-2ecc-4d61-b5b9-7acd33d6991b">
       <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
       <jdbc-url>jdbc:mysql://localhost:3306/astadb</jdbc-url>
+=======
+    <data-source source="LOCAL" name="@localhost" uuid="08384ddb-297f-47cf-a828-9232bda4d8dd">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://localhost:3306</jdbc-url>
+>>>>>>> Stashed changes
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>

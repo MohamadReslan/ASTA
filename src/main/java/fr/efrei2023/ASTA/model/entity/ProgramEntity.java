@@ -2,8 +2,6 @@ package fr.efrei2023.ASTA.model.entity;
 
 import jakarta.persistence.*;
 
-import java.sql.Date;
-
 @Entity
 @Table(name = "program", schema = "astadb", catalog = "")
 public class ProgramEntity {
@@ -16,7 +14,7 @@ public class ProgramEntity {
     private String label;
     @Basic
     @Column(name = "diploma_year")
-    private Date diplomaYear;
+    private String diplomaYear;
     @Basic
     @Column(name = "major")
     private String major;
@@ -37,11 +35,11 @@ public class ProgramEntity {
         this.label = label;
     }
 
-    public Date getDiplomaYear() {
+    public String getDiplomaYear() {
         return diplomaYear;
     }
 
-    public void setDiplomaYear(Date diplomaYear) {
+    public void setDiplomaYear(String diplomaYear) {
         this.diplomaYear = diplomaYear;
     }
 
