@@ -10,11 +10,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7bd2c891-bfcf-4071-ad64-692ce80efbba" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/userAdd.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/efrei2023/ASTA/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/efrei2023/ASTA/controller/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/users.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/users.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/index.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -93,8 +91,13 @@
     "vue.rearranger.settings.migration": "true"
   },
   "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mysql"
+    ],
     "RunConfigurationTargetLRU": [
-      "32bce71e-47e6-4466-a18d-b73a16ce8cb1"
+      "32bce71e-47e6-4466-a18d-b73a16ce8cb1",
+      "c8c790e3-5131-47c0-9f1d-e6c175f5473e",
+      "699be568-2ecc-4d61-b5b9-7acd33d6991b"
     ]
   }
 }]]></component>
@@ -117,8 +120,22 @@
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager">
-    <configuration name="JBoss/WildFly 27.0.1.Final" type="JBossConfiguration" factoryName="Local" APPLICATION_SERVER_NAME="JBoss/WildFly 27.0.1.Final" ALTERNATIVE_JRE_ENABLED="true" ALTERNATIVE_JRE_PATH="openjdk-20" nameIsGenerated="true">
+  <component name="RunDashboard">
+    <option name="excludedTypes">
+      <set>
+        <option value="JBossConfiguration" />
+      </set>
+    </option>
+  </component>
+  <component name="RunManager" selected="JBoss/WildFly Server.JBoss/WildFly 27.0.1.Final1">
+    <configuration name="create_astadb.sql" type="DatabaseScript" editBeforeRun="true" temporary="true" nameIsGenerated="true">
+      <script-file value="$PROJECT_DIR$/src/main/java/fr/efrei2023/ASTA/utils/create_astadb.sql" />
+      <script-mode>FILE</script-mode>
+      <data-source id="699be568-2ecc-4d61-b5b9-7acd33d6991b" />
+      <method v="2" />
+    </configuration>
+    <configuration name="JBoss/WildFly 27.0.1.Final1" type="JBossConfiguration" factoryName="Local" APPLICATION_SERVER_NAME="JBoss/WildFly 27.0.1.Final1" ALTERNATIVE_JRE_ENABLED="true" ALTERNATIVE_JRE_PATH="17" nameIsGenerated="true">
+      <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8080/ASTA" />
       <option name="UPDATING_POLICY" value="restart-server" />
       <deployment>
         <artifact name="ASTA:war exploded">
@@ -134,18 +151,8 @@
         <option name="CREDENTIAL_ALIAS" />
       </server-settings>
       <predefined_log_file enabled="true" id="JBoss" />
-      <extension name="net.ashald.envfile">
-        <option name="IS_ENABLED" value="false" />
-        <option name="IS_SUBST" value="false" />
-        <option name="IS_PATH_MACRO_SUPPORTED" value="false" />
-        <option name="IS_IGNORE_MISSING_FILES" value="false" />
-        <option name="IS_ENABLE_EXPERIMENTAL_INTEGRATIONS" value="false" />
-        <ENTRIES>
-          <ENTRY IS_ENABLED="true" PARSER="runconfig" IS_EXECUTABLE="false" />
-        </ENTRIES>
-      </extension>
       <RunnerSettings RunnerId="Debug">
-        <option name="DEBUG_PORT" value="50267" />
+        <option name="DEBUG_PORT" value="50273" />
       </RunnerSettings>
       <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Cover">
         <option name="USE_ENV_VARIABLES" value="true" />
@@ -201,7 +208,7 @@
     </configuration>
     <list>
       <item itemvalue="Database Script.create_astadb.sql" />
-      <item itemvalue="JBoss/WildFly Server.JBoss/WildFly 27.0.1.Final" />
+      <item itemvalue="JBoss/WildFly Server.JBoss/WildFly 27.0.1.Final1" />
     </list>
     <recent_temporary>
       <list>
