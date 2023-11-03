@@ -1,6 +1,5 @@
 package fr.efrei2023.ASTA.controller;
 
-import fr.efrei2023.ASTA.model.bean.User;
 import fr.efrei2023.ASTA.model.entity.UserEntity;
 import fr.efrei2023.ASTA.model.sessionbean.UserSessionBean;
 import jakarta.ejb.EJB;
@@ -11,7 +10,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -21,7 +19,7 @@ public class UserController extends HttpServlet {
     private UserSessionBean userSessionBean;
 
     private List<UserEntity> allUsers;
-    private UserEntity connectedUser = null;
+    private UserEntity userConnected = null;
     private final static String ERROR_MESSAGE = "Infos de connexion non valides. Merci de les saisir à nouveau.\n";
 
     private final static String ERROR_MESSAGE_NO_USER_SELECT = "Veuillez séléctionnez un Apprenti.\n";
@@ -33,16 +31,16 @@ public class UserController extends HttpServlet {
             case "Login":
                 if(checkUserConnection(request, response) && isAdmin()){ // if good and admin dispatch new page
                     // get info of all users
-                    List<UserEntity> allUsers = userSessionBean.getAllRelatedUsersByUser(connectedUser.getId());
+                    List<UserEntity> allUsers = userSessionBean.getAllRelatedUsersByUser(userConnected.getId());
                     request.setAttribute("allUsers", allUsers);
 
                     // get info of connected user
-                    request.setAttribute("userConnected", connectedUser);
+                    request.setAttribute("userConnected", userConnected);
                     request.setAttribute("errorMessage", "");
                     request.getRequestDispatcher("users.jsp").forward(request, response);
                 }
                 else if (checkUserConnection(request, response) && !isAdmin()) { // if good but no admin
-                    UserEntity userConnected = userSessionBean.getUserById(connectedUser.getId());
+                    userConnected = userSessionBean.getUserById(userConnected.getId());
                     request.setAttribute("errorMessage", "");
                     request.setAttribute("utilisateur", userConnected);
                     request.getRequestDispatcher("bienvenue.jsp").forward(request,response);
@@ -57,15 +55,17 @@ public class UserController extends HttpServlet {
             case "Supprimer":
                 String selectedUser = request.getParameter("idUser");
                 if(selectedUser != null){
-                    //userSessionBean.deleteApprentice(Integer.parseInt(selectedUser)); To delete User, change to archive a user
-                    request.setAttribute("errorNoUserSelected", "Bien vu bg");
-                    allUsers = userSessionBean.getAllRelatedUsersByUser(connectedUser.getId());
+                    //userSessionBean.deleteApprentice(Integer.parseInt(selectedUser)); To delete User, need to change to archive a user
+                    request.setAttribute("errorNoUserSelected", "");
+                    allUsers = userSessionBean.getAllRelatedUsersByUser(userConnected.getId());
+                    request.setAttribute("userConnected", userConnected);
                     request.setAttribute("allUsers", allUsers);
                     request.getRequestDispatcher("users.jsp").forward(request, response);
                 }
                 else{
                     request.setAttribute("errorNoUserSelected", ERROR_MESSAGE_NO_USER_SELECT);
                     request.setAttribute("allUsers", allUsers);
+                    request.setAttribute("userConnected", userConnected);
                     request.getRequestDispatcher("users.jsp").forward(request, response);
                 }
                 break;
@@ -77,16 +77,18 @@ public class UserController extends HttpServlet {
     }
 
     public boolean isAdmin(){
-        return Objects.equals(connectedUser.getType(), "tuteur");
+        return Objects.equals(userConnected.getType(), "tuteur");
     }
     public boolean checkUserConnection(HttpServletRequest request, HttpServletResponse response){
         String login = request.getParameter("champLogin"); // = lastname
         String mdp = request.getParameter("champMotDePasse");
 
-        connectedUser = userSessionBean.getLoggedUser(login, mdp);
-        allUsers = userSessionBean.getAllRelatedUsersByUser(connectedUser.getId());
+        userConnected = userSessionBean.getLoggedUser(login, mdp);
+        if(userConnected != null){
+            allUsers = userSessionBean.getAllRelatedUsersByUser(userConnected.getId());
+        }
 
-        return connectedUser != null;
+        return userConnected != null;
     }
 
     public void init(){

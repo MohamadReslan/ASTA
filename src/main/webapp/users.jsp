@@ -10,7 +10,12 @@
     <script src="https://unpkg.com/bootstrap-table@1.22.1/dist/bootstrap-table.min.js"></script>
 </head>
 <body>
-<h3>Bonjour ${userConnected.firstName} ${userConnected.lastName} !</h3>
+<div class="d-flex justify-content-between">
+    <h3>Bonjour ${userConnected.firstName} ${userConnected.lastName} !</h3>
+    <form method="post" action="user-controller">
+        <input type="submit" name="action" value="Déconnexion" class="btn btn-primary"/>
+    </form>
+</div>
 <div class="content m-16">
     <form method="post" action="user-controller">
     <table id="table"
