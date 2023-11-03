@@ -19,7 +19,6 @@ public class UserController extends HttpServlet {
     private UserSessionBean userSessionBean;
 
     private List<UserEntity> allUsers;
-    private UserEntity connectedUser = null;
     private UserEntity userConnected = null;
     private final static String ERROR_MESSAGE = "Infos de connexion non valides. Merci de les saisir à nouveau.\n";
 
@@ -53,12 +52,12 @@ public class UserController extends HttpServlet {
             case "Archiver":
                 int userId = Integer.parseInt(request.getParameter("userId"));
                 userSessionBean.updateUserArchive(userId);
-                request.setAttribute("userConnected", connectedUser);
+                request.setAttribute("userConnected", userConnected);
                 request.setAttribute("allUsers", userSessionBean.getAllUsers());
                 request.getRequestDispatcher("users.jsp").forward(request, response);
                 break;
             case "Users Archiver":
-                request.setAttribute("userConnected", connectedUser);
+                request.setAttribute("userConnected", userConnected);
                 request.setAttribute("allArchivedUsers", userSessionBean.getAllArchivedUsers());
                 request.getRequestDispatcher("archivedUser.jsp").forward(request, response);
                 break;
@@ -89,8 +88,8 @@ public class UserController extends HttpServlet {
     }
 
     public boolean isAdmin(){
-        return Objects.equals(connectedUser.getType(), "tuteur") &&
-                Objects.equals(connectedUser.getLastName(), "Admin");
+        return Objects.equals(userConnected.getType(), "tuteur") &&
+                Objects.equals(userConnected.getLastName(), "Admin");
     }
     public boolean checkUserConnection(HttpServletRequest request, HttpServletResponse response){
         String login = request.getParameter("champLogin"); // = lastname
