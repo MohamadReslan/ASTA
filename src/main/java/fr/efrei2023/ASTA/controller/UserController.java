@@ -19,6 +19,7 @@ public class UserController extends HttpServlet {
     private UserSessionBean userSessionBean;
 
     private UserEntity connectedUser = null;
+    private List<UserEntity> allUsers;
     private final static String ERROR_MESSAGE = "Infos de connexion non valides. Merci de les saisir à nouveau.\n";
 
     public void processRequest(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
@@ -28,7 +29,7 @@ public class UserController extends HttpServlet {
             case "Login":
                 if(checkUserConnection(request, response) && isAdmin()){ // if good and admin dispatch new page
                     // get info of all users
-                    List<UserEntity> allUsers = userSessionBean.getAllRelatedUsersByUser(connectedUser.getId());
+                    allUsers = userSessionBean.getAllUser();
                     request.setAttribute("allUsers", allUsers);
 
                     // get info of connected user
@@ -47,13 +48,16 @@ public class UserController extends HttpServlet {
                 }
                 break;
             case "Archiver":
-                System.out.println("Click on Archiver !!");
                 int userId = Integer.parseInt(request.getParameter("userId"));
-
-                System.out.println("Archiving user with ID: " + userId);
                 userSessionBean.updateUserArchive(userId);
-
+                request.setAttribute("userConnected", connectedUser);
+                request.setAttribute("allUsers", userSessionBean.getAllUsers());
                 request.getRequestDispatcher("users.jsp").forward(request, response);
+                break;
+            case "Users Archiver":
+                request.setAttribute("userConnected", connectedUser);
+                request.setAttribute("allArchivedUsers", userSessionBean.getAllArchivedUsers());
+                request.getRequestDispatcher("archivedUser.jsp").forward(request, response);
                 break;
             case "Ajouter":
                 request.getRequestDispatcher("userAdd.jsp").forward(request, response);
@@ -61,11 +65,12 @@ public class UserController extends HttpServlet {
             default:
                 request.setAttribute("errorMessage", "");
                 request.getRequestDispatcher("index.jsp").forward(request, response);
-        }// completer par d'autre case pour tout ce qui touche au User (pas forcement dans la page login)
+        }
     }
 
     public boolean isAdmin(){
-        return Objects.equals(connectedUser.getType(), "tuteur");
+        return Objects.equals(connectedUser.getType(), "tuteur") &&
+                Objects.equals(connectedUser.getLastName(), "Admin");
     }
     public boolean checkUserConnection(HttpServletRequest request, HttpServletResponse response){
         String login = request.getParameter("champLogin"); // = lastname
