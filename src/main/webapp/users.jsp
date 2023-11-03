@@ -22,46 +22,60 @@
            data-toggle="table"
            data-height="460"
            data-pagination="true"
-           data-page-size="2"
+           data-page-size="20"
            data-search="true">
         <thead>
-            <tr>
-                <th data-field="id">#</th>
-                <th data-field="firstName" data-sortable="true">Prénom</th>
-                <th data-field="lastName" data-sortable="true">Nom</th>
-                <th data-field="phone">Téléphone</th>
-                <th data-field="mail">Mail</th>
-            </tr>
+        <tr>
+            <th data-field="id">#</th>
+            <th data-field="firstName" data-sortable="true">Prénom</th>
+            <th data-field="lastName" data-sortable="true">Nom</th>
+            <th data-field="phone">Téléphone</th>
+            <th data-field="mail">Mail</th>
+            <th data-field="action">Actions</th>
+        </tr>
         </thead>
         <tbody>
-            <c:choose>
-                <c:when test="${fn:length(allUsers) > 0}">
-                    <c:forEach items="${allUsers}" var="user">
+        <c:choose>
+            <c:when test="${fn:length(allUsers) > 0}">
+                <c:forEach items="${allUsers}" var="user">
+                    <c:if test="${!user.getArchive() && user.lastName != 'Admin'}">
                         <tr>
-                            <th><input type="radio" name="idUser" value=${user.id}></th>
+                            <td>${user.id}</td>
                             <td>${user.firstName}</td>
                             <td>${user.lastName}</td>
                             <td>${user.phone}</td>
                             <td>${user.mail}</td>
+                            <td>
+                                <form action="user-controller" method="post" id="archive-form">
+                                    <input type="hidden" id="userId" name="userId" value=${user.id}>
+                                    <button class="archive-button" type="submit" name="action" value="Archiver" data-userid="${user.id}">
+                                        Archiver
+                                    </button>
+                                </form>
+                            </td>
                         </tr>
-                    </c:forEach>
-                </c:when>
-                <c:otherwise>
-                    <tr>
-                        <th colspan="5">La liste est vide. Ajoutez au moins un(e) apprenti(e).</th>
-                    </tr>
-                </c:otherwise>
-            </c:choose>
+                    </c:if>
+                </c:forEach>
+            </c:when>
+            <c:otherwise>
+                <tr>
+                    <td colspan="6">La liste est vide. Ajoutez au moins un(e) apprenti(e).</td>
+                </tr>
+            </c:otherwise>
+        </c:choose>
         </tbody>
     </table>
-    <div>
         <input type="submit" name="action" value="Ajouter" class="btn btn-primary"/>
-        <input type="submit" name="action" value="Supprimer" class="btn btn-primary"/>
-    </div>
-    <div style="color:red">
-        ${errorNoUserSelected}
-    </div>
+        <input type="submit" name="action" value="Users Archiver" class="btn btn-primary"/>
     </form>
 </div>
+
+<script>
+    $(document).ready(function() {
+        $('.archive-button').click(function() {
+            alert('Archivage réussi !');
+        });
+    });
+</script>
 </body>
 </html>

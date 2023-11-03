@@ -31,7 +31,7 @@ public class UserController extends HttpServlet {
             case "Login":
                 if(checkUserConnection(request, response) && isAdmin()){ // if good and admin dispatch new page
                     // get info of all users
-                    List<UserEntity> allUsers = userSessionBean.getAllRelatedUsersByUser(userConnected.getId());
+                    allUsers = userSessionBean.getAllUser();
                     request.setAttribute("allUsers", allUsers);
 
                     // get info of connected user
@@ -48,6 +48,18 @@ public class UserController extends HttpServlet {
                     request.setAttribute("errorMessage", ERROR_MESSAGE);
                     request.getRequestDispatcher("index.jsp").forward(request, response);
                 }
+                break;
+            case "Archiver":
+                int userId = Integer.parseInt(request.getParameter("userId"));
+                userSessionBean.updateUserArchive(userId);
+                request.setAttribute("userConnected", userConnected);
+                request.setAttribute("allUsers", userSessionBean.getAllUsers());
+                request.getRequestDispatcher("users.jsp").forward(request, response);
+                break;
+            case "Users Archiver":
+                request.setAttribute("userConnected", userConnected);
+                request.setAttribute("allArchivedUsers", userSessionBean.getAllArchivedUsers());
+                request.getRequestDispatcher("archivedUser.jsp").forward(request, response);
                 break;
             case "Ajouter":
                 request.getRequestDispatcher("userAdd.jsp").forward(request, response);
@@ -72,12 +84,12 @@ public class UserController extends HttpServlet {
             default:
                 request.setAttribute("errorMessage", "");
                 request.getRequestDispatcher("index.jsp").forward(request, response);
-
-        }// completer par d'autre case pour tout ce qui touche au User (pas forcement dans la page login)
+        }
     }
 
     public boolean isAdmin(){
-        return Objects.equals(userConnected.getType(), "tuteur");
+        return Objects.equals(userConnected.getType(), "tuteur") &&
+                Objects.equals(userConnected.getLastName(), "Admin");
     }
     public boolean checkUserConnection(HttpServletRequest request, HttpServletResponse response){
         String login = request.getParameter("champLogin"); // = lastname
