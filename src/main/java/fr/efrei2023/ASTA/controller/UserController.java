@@ -1,6 +1,10 @@
 package fr.efrei2023.ASTA.controller;
 
+import fr.efrei2023.ASTA.model.entity.CompanyEntity;
+import fr.efrei2023.ASTA.model.entity.ProgramEntity;
 import fr.efrei2023.ASTA.model.entity.UserEntity;
+import fr.efrei2023.ASTA.model.sessionbean.CompanySessionBean;
+import fr.efrei2023.ASTA.model.sessionbean.ProgramSessionBean;
 import fr.efrei2023.ASTA.model.sessionbean.UserSessionBean;
 import jakarta.ejb.EJB;
 import jakarta.servlet.ServletException;
@@ -17,13 +21,18 @@ import java.util.Objects;
 public class UserController extends HttpServlet {
     @EJB
     private UserSessionBean userSessionBean;
+    @EJB
+    private CompanySessionBean companySessionBean;
+    @EJB
+    private ProgramSessionBean programSessionBean;
 
     private List<UserEntity> allUsers;
     private UserEntity userConnected = null;
     private final static String ERROR_MESSAGE = "Infos de connexion non valides. Merci de les saisir à nouveau.\n";
 
     private final static String ERROR_MESSAGE_NO_USER_SELECT = "Veuillez séléctionnez un Apprenti.\n";
-
+    public UserController() {
+    }
     public void processRequest(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         String action = request.getParameter("action");
 
@@ -62,6 +71,11 @@ public class UserController extends HttpServlet {
                 request.getRequestDispatcher("archivedUser.jsp").forward(request, response);
                 break;
             case "Ajouter":
+                List<CompanyEntity> companies = companySessionBean.getAllCompanies();
+                List<ProgramEntity> programs = programSessionBean.getAllPrograms();
+                request.setAttribute("allCompanies", companies);
+                request.setAttribute("allPrograms", programs);
+                request.setAttribute("userConnected", userConnected);
                 request.getRequestDispatcher("userAdd.jsp").forward(request, response);
                 break;
             case "Supprimer":
@@ -81,6 +95,12 @@ public class UserController extends HttpServlet {
                     request.getRequestDispatcher("users.jsp").forward(request, response);
                 }
                 break;
+            case "Ajouter l'apprenti":
+                userSessionBean.createNewUser(request, userConnected.getId());
+                List<UserEntity> allUsers = userSessionBean.getAllRelatedUsersByUser(userConnected.getId());
+                request.setAttribute("allUsers", allUsers);
+                request.setAttribute("userConnected", userConnected);
+                request.getRequestDispatcher("users.jsp").forward(request, response);
             default:
                 request.setAttribute("errorMessage", "");
                 request.getRequestDispatcher("index.jsp").forward(request, response);
