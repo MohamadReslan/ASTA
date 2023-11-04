@@ -7,7 +7,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.NoResultException;
 import jakarta.persistence.Query;
-
+import jakarta.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Stateless
@@ -55,6 +55,29 @@ public class UserSessionBean {
 
     public List<UserEntity> getAllArchivedUsers() {
         Query q = em.createQuery("SELECT u FROM UserEntity u WHERE u.isArchive = true");
-        return  q.getResultList();
+        return q.getResultList();
+    }
+    public void createNewUser(HttpServletRequest request, int connectedId){
+      String lastname = request.getParameter("lastname");
+      String name = request.getParameter("name");
+      String phone = request.getParameter("phone");
+      String email = request.getParameter("email");
+      String programId = request.getParameter("selectPrograms");
+      String companyId = request.getParameter("selectCompanies");
+      em.getTransaction().begin();
+      Query q = em.createNativeQuery("INSERT INTO user(last_name, first_name,mdp,phone,mail,type,is_active,company_id,program_id,related_user_id) " +
+              "VALUES(?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9, ?10)");
+      q.setParameter(1, lastname);
+      q.setParameter(2, name);
+      q.setParameter(3, 123);
+      q.setParameter(4, phone);
+      q.setParameter(5, email);
+      q.setParameter(6, "apprenti");
+      q.setParameter(7, 1);
+      q.setParameter(8, companyId);
+      q.setParameter(9, programId);
+      q.setParameter(10, connectedId);
+      q.executeUpdate();
+      em.getTransaction().commit();
     }
 }
