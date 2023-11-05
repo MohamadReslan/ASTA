@@ -65,15 +65,12 @@ public class UserSessionBean {
       String programId = request.getParameter("selectPrograms");
       String companyId = request.getParameter("selectCompanies");
       em.getTransaction().begin();
-      Query q = em.createNativeQuery("INSERT INTO user(last_name, first_name,mdp,phone,mail,type,is_active,company_id,program_id,related_user_id) " +
-              "VALUES(?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9, ?10)");
+      Query q = em.createNativeQuery("INSERT INTO user(last_name, first_name,mdp,phone,mail,type,is_active,company_id,program_id,related_user_id,is_archive) " +
+              "VALUES(?1, ?2, 123, ?4, ?5, 'apprenti', 1, ?8, ?9, ?10, 0)");
       q.setParameter(1, lastname);
       q.setParameter(2, name);
-      q.setParameter(3, 123);
       q.setParameter(4, phone);
       q.setParameter(5, email);
-      q.setParameter(6, "apprenti");
-      q.setParameter(7, 1);
       q.setParameter(8, companyId);
       q.setParameter(9, programId);
       q.setParameter(10, connectedId);

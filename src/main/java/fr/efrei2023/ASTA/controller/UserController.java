@@ -108,7 +108,7 @@ public class UserController extends HttpServlet {
     }
 
     public boolean isAdmin(){
-        return Objects.equals(userConnected.getType(), "tuteur") &&
+        return Objects.equals(userConnected.getType(), "tuteur") ||
                 Objects.equals(userConnected.getLastName(), "Admin");
     }
     public boolean checkUserConnection(HttpServletRequest request, HttpServletResponse response){
