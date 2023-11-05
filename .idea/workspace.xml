@@ -12,7 +12,6 @@
     <list default="true" id="7bd2c891-bfcf-4071-ad64-692ce80efbba" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/fr/efrei2023/ASTA/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/efrei2023/ASTA/controller/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/efrei2023/ASTA/model/sessionbean/UserSessionBean.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/efrei2023/ASTA/model/sessionbean/UserSessionBean.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -235,7 +234,7 @@
       <workItem from="1699015136693" duration="596000" />
       <workItem from="1699016481283" duration="102000" />
       <workItem from="1699104243380" duration="7770000" />
-      <workItem from="1699219610417" duration="1370000" />
+      <workItem from="1699219610417" duration="2257000" />
     </task>
     <servers />
   </component>

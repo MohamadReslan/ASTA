@@ -43,7 +43,7 @@ INSERT INTO COMPANY VALUES (1, 'Bouygues', '10 rue du chaperon vert PARIS 75015'
                            (6, 'Gudule', '96 rue le dantec PARIS 75013', 'Porte 3');
 
 CREATE TABLE USER(
-                     id SMALLINT,
+                     id SMALLINT AUTO_INCREMENT,
                      last_name VARCHAR(50),
                      first_name VARCHAR(50),
                      mdp VARCHAR(50),
