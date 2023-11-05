@@ -40,7 +40,7 @@ public class UserController extends HttpServlet {
             case "Login":
                 if(checkUserConnection(request, response) && isAdmin()){ // if good and admin dispatch new page
                     // get info of all users
-                    allUsers = userSessionBean.getAllUser();
+                    allUsers = userSessionBean.getAllRelatedUsersByUser(userConnected.getId());
                     request.setAttribute("allUsers", allUsers);
 
                     // get info of connected user
