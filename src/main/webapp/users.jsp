@@ -38,7 +38,7 @@
         <c:choose>
             <c:when test="${fn:length(allUsers) > 0}">
                 <c:forEach items="${allUsers}" var="user">
-                    <c:if test="${!user.getArchive() && user.lastName != 'Admin'}">
+                    <c:if test="${!user.getArchive()}">
                         <tr>
                             <td>${user.id}</td>
                             <td>${user.firstName}</td>

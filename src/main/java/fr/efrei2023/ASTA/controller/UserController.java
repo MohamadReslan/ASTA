@@ -108,15 +108,14 @@ public class UserController extends HttpServlet {
     }
 
     public boolean isAdmin(){
-        return Objects.equals(userConnected.getType(), "tuteur") ||
-                Objects.equals(userConnected.getLastName(), "Admin");
+        return Objects.equals(userConnected.getType(), "tuteur");
     }
     public boolean checkUserConnection(HttpServletRequest request){
         String login = request.getParameter("champLogin"); // = lastname
         String mdp = request.getParameter("champMotDePasse");
 
         userConnected = userSessionBean.getLoggedUser(login, mdp);
-        if(userConnected != null){
+        if (userConnected != null){
             allUsers = userSessionBean.getAllRelatedUsersByUser(userConnected.getId());
         }
 
