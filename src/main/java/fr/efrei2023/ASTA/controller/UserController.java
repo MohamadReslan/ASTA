@@ -7,15 +7,19 @@ import fr.efrei2023.ASTA.model.sessionbean.CompanySessionBean;
 import fr.efrei2023.ASTA.model.sessionbean.ProgramSessionBean;
 import fr.efrei2023.ASTA.model.sessionbean.UserSessionBean;
 import jakarta.ejb.EJB;
+import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
+
+import static fr.efrei2023.ASTA.utils.UsersConstantes.*;
 
 @WebServlet("user-controller")
 public class UserController extends HttpServlet {
@@ -25,114 +29,123 @@ public class UserController extends HttpServlet {
     private CompanySessionBean companySessionBean;
     @EJB
     private ProgramSessionBean programSessionBean;
+    private UserEntity userConnected;
 
-    private List<UserEntity> allUsers;
-    private UserEntity userConnected = null;
-    private final static String ERROR_MESSAGE = "Infos de connexion non valides. Merci de les saisir à nouveau.\n";
-
-    private final static String ERROR_MESSAGE_NO_USER_SELECT = "Veuillez séléctionnez un Apprenti.\n";
     public UserController() {
     }
+
     public void processRequest(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        String action = request.getParameter("action");
+        String action = request.getParameter(ACTION);
 
-        switch(action){
-            case "Login":
-                if(checkUserConnection(request) && isAdmin()){ // if good and admin dispatch new page
-                    // get info of all users
-                    allUsers = userSessionBean.getAllRelatedUsersByUser(userConnected.getId());
-                    request.setAttribute("allUsers", allUsers);
-
-                    // get info of connected user
-                    request.setAttribute("userConnected", userConnected);
-                    request.setAttribute("errorMessage", "");
-                    request.getRequestDispatcher("users.jsp").forward(request, response);
-                }
-                else if (checkUserConnection(request) && !isAdmin()) { // if good but no admin
-                    userConnected = userSessionBean.getUserById(userConnected.getId());
-                    request.setAttribute("errorMessage", "");
-                    request.setAttribute("utilisateur", userConnected);
-                    request.getRequestDispatcher("bienvenue.jsp").forward(request,response);
-                } else{
-                    request.setAttribute("errorMessage", ERROR_MESSAGE);
-                    request.getRequestDispatcher("index.jsp").forward(request, response);
-                }
+        switch (action) {
+            case ACTION_LOGIN:
+                updatedUserConnected(request);
+                moveToNextPage(request, response);
                 break;
-            case "Archiver":
-                int userId = Integer.parseInt(request.getParameter("userId"));
-                userSessionBean.updateUserArchive(userId);
-                request.setAttribute("userConnected", userConnected);
-                request.setAttribute("allUsers", userSessionBean.getAllRelatedUsersByUser(userConnected.getId()));
-                request.getRequestDispatcher("users.jsp").forward(request, response);
+            case ACTION_ARCHIVER:
+                userSessionBean.updateUserArchive(Integer.parseInt(request.getParameter("userId")));
+                request.getSession().setAttribute("allUsers", userSessionBean.getAllRelatedUsersByUser(userConnected.getId()));
+                request.getRequestDispatcher(PAGE_ALL_USERS).forward(request, response);
                 break;
-            case "Utilisateurs archivés":
-                request.setAttribute("userConnected", userConnected);
-                request.setAttribute("allArchivedUsers", userSessionBean.getAllArchivedUsers());
-                request.getRequestDispatcher("archivedUser.jsp").forward(request, response);
+            case ACTION_APPRENTICE_ARCHIVER:
+                request.getSession().setAttribute("userConnected", userConnected);
+                request.getSession().setAttribute("allArchivedUsers", userSessionBean.getAllArchivedUsers());
+                request.getRequestDispatcher(PAGE_ARCHIVED_USER).forward(request, response);
                 break;
-            case "Ajouter un utilisateur":
-                List<CompanyEntity> companies = companySessionBean.getAllCompanies();
-                List<ProgramEntity> programs = programSessionBean.getAllPrograms();
-                request.setAttribute("allCompanies", companies);
-                request.setAttribute("allPrograms", programs);
-                request.setAttribute("userConnected", userConnected);
-                request.getRequestDispatcher("userAdd.jsp").forward(request, response);
+            case ACTION_AJOUTER:
+                settingInfosOfAllCompaniesAndPrograms(request);
+                request.getRequestDispatcher(PAGE_ADD_USER).forward(request, response);
                 break;
-            case "Supprimer":
-                String selectedUser = request.getParameter("idUser");
-                if(selectedUser != null){
-                    //userSessionBean.deleteApprentice(Integer.parseInt(selectedUser)); To delete User, need to change to archive a user
-                    request.setAttribute("errorNoUserSelected", "");
-                    allUsers = userSessionBean.getAllRelatedUsersByUser(userConnected.getId());
-                    request.setAttribute("userConnected", userConnected);
-                    request.setAttribute("allUsers", allUsers);
-                    request.getRequestDispatcher("users.jsp").forward(request, response);
-                }
+            case ACTION_AJOUTER_APPRENTI:
+                if (!isAnotherUserUsingSameMail(request))
+                    moveToPage(PAGE_ALL_USERS, request, response);
                 else{
-                    request.setAttribute("errorNoUserSelected", ERROR_MESSAGE_NO_USER_SELECT);
-                    request.setAttribute("allUsers", allUsers);
-                    request.setAttribute("userConnected", userConnected);
-                    request.getRequestDispatcher("users.jsp").forward(request, response);
+                    moveToPage(PAGE_ADD_USER, request, response);
                 }
                 break;
-            case "Ajouter l'apprenti":
-                userSessionBean.createNewUser(request, userConnected.getId());
-                List<UserEntity> allUsers = userSessionBean.getAllRelatedUsersByUser(userConnected.getId());
-                request.setAttribute("allUsers", allUsers);
-                request.setAttribute("userConnected", userConnected);
-                request.getRequestDispatcher("users.jsp").forward(request, response);
             default:
-                request.setAttribute("errorMessage", "");
-                request.getRequestDispatcher("index.jsp").forward(request, response);
+                request.getSession().setAttribute("errorMessage", "");
+                request.getRequestDispatcher(PAGE_INDEX).forward(request, response);
         }
     }
 
-    public boolean isAdmin(){
-        return Objects.equals(userConnected.getType(), "tuteur");
+    private void settingInfosOfAllCompaniesAndPrograms(HttpServletRequest request) {
+        request.getSession().setAttribute("allCompanies", companySessionBean.getAllCompanies());
+        request.getSession().setAttribute("allPrograms", programSessionBean.getAllPrograms());
     }
-    public boolean checkUserConnection(HttpServletRequest request){
-        String login = request.getParameter("champLogin"); // = lastname
-        String mdp = request.getParameter("champMotDePasse");
 
-        userConnected = userSessionBean.getLoggedUser(login, mdp);
-        if (userConnected != null){
-            allUsers = userSessionBean.getAllRelatedUsersByUser(userConnected.getId());
+    private void moveToPage(String page, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        switch (page) {
+            case PAGE_ALL_USERS:
+                userSessionBean.createNewUser(request, userConnected.getId());
+                settingInfosOfAllUsersAndUserConnected(request);
+                request.getRequestDispatcher(page).forward(request, response);
+                break;
+            case PAGE_ADD_USER:
+                settingInfosOfAllCompaniesAndPrograms(request);
+                request.getSession().setAttribute("errorMessage", ERROR_MESSAGE_USER_DUPLICATED);
+                request.getRequestDispatcher(page).forward(request, response);
+                break;
+            default:
+
         }
+    }
 
+    private void moveToNextPage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        if (checkUserConnection()) {
+            if (isAdmin()) {
+                settingInfosOfAllUsersAndUserConnected(request);
+                request.getRequestDispatcher(PAGE_ALL_USERS).forward(request, response);
+            } else {
+                request.getSession().setAttribute("utilisateur", userSessionBean.getUserById(userConnected.getId()));
+                request.getRequestDispatcher("bienvenue.jsp").forward(request, response);
+            }
+        } else {
+            request.getSession().setAttribute("errorMessage", ERROR_MESSAGE_CREDENTIALS_KO);
+            request.getRequestDispatcher(PAGE_INDEX).forward(request, response);
+        }
+    }
+
+    private void settingInfosOfAllUsersAndUserConnected(HttpServletRequest request) {
+        request.getSession().setAttribute("userConnected", userConnected);
+        request.getSession().setAttribute("allUsers", userSessionBean.getAllRelatedUsersByUser(userConnected.getId()));
+    }
+
+    private boolean isAnotherUserUsingSameMail(HttpServletRequest request) {
+        for (UserEntity user : userSessionBean.getAllUsers()) {
+            if (user.getMail().equalsIgnoreCase(request.getParameter(FIELD_MAIL)))
+                return true;
+        }
+        return false;
+    }
+
+    private void updatedUserConnected(HttpServletRequest request) {
+        userConnected = new UserEntity();
+        userConnected.setMail(request.getParameter(FIELD_LOGIN));
+        userConnected.setMdp(request.getParameter(FIELD_PWD));
+        request.getSession().setAttribute("userConnected", userConnected);
+    }
+
+    private boolean isAdmin() {
+        return userConnected.getType().equalsIgnoreCase(TYPE_ADMIN);
+    }
+
+    private boolean checkUserConnection() {
+        userConnected = userSessionBean.getLoggedUser(userConnected.getMail(), userConnected.getMdp());
         return userConnected != null;
     }
 
-    public void init(){
+    public void init() {
     }
 
     public void destroy() {
     }
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        request.getRequestDispatcher("index.jsp").forward(request, response);
+        request.getRequestDispatcher(PAGE_INDEX).forward(request, response);
     }
 
-    public void doPost (HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         processRequest(request, response);
     }
 }
