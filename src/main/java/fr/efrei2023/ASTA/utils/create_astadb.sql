@@ -48,7 +48,7 @@ CREATE TABLE USER(
                      first_name VARCHAR(50),
                      mdp VARCHAR(50),
                      phone VARCHAR(50),
-                     mail VARCHAR(50),
+                     mail VARCHAR(50) UNIQUE,
                      type VARCHAR(50),
                      is_active BOOLEAN,
                      is_archive BOOLEAN,

@@ -7,11 +7,11 @@
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- Add jQuery -->
     <script src="https://unpkg.com/bootstrap-table@1.22.1/dist/bootstrap-table.min.js"></script>
-    <title>Archived User</title>
+    <title>Page Apprenti Archivé</title>
 </head>
 <body>
-
-<h3>Archived User(s)</h3>
+<h3>Bonjour ${userConnected.firstName} ${userConnected.lastName} !</h3>
+<h3>Liste des apprentis archivé</h3>
 <div class="content m-16">
 
     <table id="table"
