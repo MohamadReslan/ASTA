@@ -29,7 +29,6 @@ public class UserController extends HttpServlet {
     private CompanySessionBean companySessionBean;
     @EJB
     private ProgramSessionBean programSessionBean;
-    private List<UserEntity> allUsers;
     private UserEntity userConnected;
 
     public UserController() {
