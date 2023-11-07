@@ -54,7 +54,7 @@ public class UserController extends HttpServlet {
                 request.getRequestDispatcher(PAGE_ARCHIVED_USER).forward(request, response);
                 break;
             case ACTION_AJOUTER:
-                settingInfosOfAllCompaniesAndProgramsAndUserConnected(request);
+                settingInfosOfAllCompaniesAndPrograms(request);
                 request.getRequestDispatcher(PAGE_ADD_USER).forward(request, response);
                 break;
             case ACTION_AJOUTER_APPRENTI:
@@ -65,14 +65,14 @@ public class UserController extends HttpServlet {
                 }
                 break;
             default:
+                request.getSession().setAttribute("errorMessage", "");
                 request.getRequestDispatcher(PAGE_INDEX).forward(request, response);
         }
     }
 
-    private void settingInfosOfAllCompaniesAndProgramsAndUserConnected(HttpServletRequest request) {
+    private void settingInfosOfAllCompaniesAndPrograms(HttpServletRequest request) {
         request.getSession().setAttribute("allCompanies", companySessionBean.getAllCompanies());
         request.getSession().setAttribute("allPrograms", programSessionBean.getAllPrograms());
-        request.getSession().setAttribute("userConnected", userConnected);
     }
 
     private void moveToPage(String page, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -83,7 +83,7 @@ public class UserController extends HttpServlet {
                 request.getRequestDispatcher(page).forward(request, response);
                 break;
             case PAGE_ADD_USER:
-                settingInfosOfAllCompaniesAndProgramsAndUserConnected(request);
+                settingInfosOfAllCompaniesAndPrograms(request);
                 request.getSession().setAttribute("errorMessage", ERROR_MESSAGE_USER_DUPLICATED);
                 request.getRequestDispatcher(page).forward(request, response);
                 break;
