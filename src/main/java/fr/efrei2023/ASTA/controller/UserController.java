@@ -65,12 +65,12 @@ public class UserController extends HttpServlet {
                 request.setAttribute("allUsers", userSessionBean.getAllRelatedUsersByUser(userConnected.getId()));
                 request.getRequestDispatcher("users.jsp").forward(request, response);
                 break;
-            case "Users Archiver":
+            case "Utilisateurs archivés":
                 request.setAttribute("userConnected", userConnected);
                 request.setAttribute("allArchivedUsers", userSessionBean.getAllArchivedUsers());
                 request.getRequestDispatcher("archivedUser.jsp").forward(request, response);
                 break;
-            case "Ajouter":
+            case "Ajouter un utilisateur":
                 List<CompanyEntity> companies = companySessionBean.getAllCompanies();
                 List<ProgramEntity> programs = programSessionBean.getAllPrograms();
                 request.setAttribute("allCompanies", companies);

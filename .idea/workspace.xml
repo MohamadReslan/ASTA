@@ -12,6 +12,7 @@
     <list default="true" id="7bd2c891-bfcf-4071-ad64-692ce80efbba" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/fr/efrei2023/ASTA/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/efrei2023/ASTA/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/users.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/users.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,6 +55,13 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="useMavenConfig" value="true" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
   <component name="PhpWorkspaceProjectConfiguration" interpreter_name="C:\php.exe" />
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
@@ -95,7 +103,8 @@
     ],
     "RunConfigurationTargetLRU": [
       "32bce71e-47e6-4466-a18d-b73a16ce8cb1",
-      "11f879c3-f5a6-419e-8fce-7e89ec79db25"
+      "11f879c3-f5a6-419e-8fce-7e89ec79db25",
+      "1151a667-98a0-4979-a316-5a1a632009be"
     ]
   }
 }]]></component>
@@ -122,10 +131,10 @@
     <configuration name="create_astadb.sql" type="DatabaseScript" editBeforeRun="true" temporary="true" nameIsGenerated="true">
       <script-file value="$PROJECT_DIR$/src/main/java/fr/efrei2023/ASTA/utils/create_astadb.sql" />
       <script-mode>FILE</script-mode>
-      <data-source id="11f879c3-f5a6-419e-8fce-7e89ec79db25" />
+      <data-source id="1151a667-98a0-4979-a316-5a1a632009be" />
       <method v="2" />
     </configuration>
-    <configuration name="JBoss/WildFly 27.0.1.Final" type="JBossConfiguration" factoryName="Local" APPLICATION_SERVER_NAME="JBoss/WildFly 27.0.1.Final" ALTERNATIVE_JRE_ENABLED="true" ALTERNATIVE_JRE_PATH="openjdk-20" nameIsGenerated="true">
+    <configuration name="JBoss/WildFly 27.0.1.Final" type="JBossConfiguration" factoryName="Local" APPLICATION_SERVER_NAME="JBoss/WildFly 27.0.1.Final" ALTERNATIVE_JRE_ENABLED="true" ALTERNATIVE_JRE_PATH="corretto-17" nameIsGenerated="true">
       <option name="UPDATING_POLICY" value="restart-server" />
       <deployment>
         <artifact name="ASTA:war exploded">
@@ -206,6 +215,10 @@
         </option>
       </method>
     </configuration>
+    <list>
+      <item itemvalue="Database Script.create_astadb.sql" />
+      <item itemvalue="JBoss/WildFly Server.JBoss/WildFly 27.0.1.Final" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Database Script.create_astadb.sql" />
@@ -235,6 +248,7 @@
       <workItem from="1699016481283" duration="102000" />
       <workItem from="1699104243380" duration="7770000" />
       <workItem from="1699219610417" duration="2257000" />
+      <workItem from="1699378143464" duration="4064000" />
     </task>
     <servers />
   </component>

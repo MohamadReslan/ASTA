@@ -9,21 +9,25 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- Add jQuery -->
     <script src="https://unpkg.com/bootstrap-table@1.22.1/dist/bootstrap-table.min.js"></script>
 </head>
-<body>
-<div class="d-flex justify-content-between">
-    <h3>Bonjour ${userConnected.firstName} ${userConnected.lastName} !</h3>
-    <form method="post" action="user-controller">
-        <input type="submit" name="action" value="Déconnexion" class="btn btn-primary"/>
+<body style="background-color: #887D61;margin: 4px">
+<div style="display: flex; align-items: center; gap: 6px;justify-content: space-between">
+    <div style="display: flex;gap:4px">
+        <h3>Bonjour </h3><h3 style="font-weight: bold"> ${userConnected.firstName} ${userConnected.lastName} !</h3>
+    </div>
+    <form method="post" action="user-controller" style="margin: 0">
+        <input type="submit" name="action" value="Déconnexion" style="background-color: #8B785C;border-radius: 8px;font-size: 26px;margin-right: 10px"/>
     </form>
 </div>
-<div class="content m-16">
+<div class="content m-16" style="background-color: #CFC79A;width: 60%; padding: 20px;margin: 25px">
+    <h2 style="font-weight: bold;margin: 10px">Liste des étudiants</h2>
     <form method="post" action="user-controller">
     <table id="table"
            data-toggle="table"
            data-height="460"
            data-pagination="true"
            data-page-size="20"
-           data-search="true">
+           data-search="true"
+           locale="fr">
         <thead>
         <tr>
             <th data-field="id">#</th>
@@ -48,7 +52,7 @@
                             <td>
                                 <form action="user-controller" method="post" id="archive-form">
                                     <input type="hidden" id="userId" name="userId" value=${user.id}>
-                                    <button class="archive-button" type="submit" name="action" value="Archiver" data-userid="${user.id}">
+                                    <button class="archive-button" style="background-color: #8B785C;border-radius: 8px;font-size: 26px;" type="submit" name="action" value="Archiver" data-userid="${user.id}">
                                         Archiver
                                     </button>
                                 </form>
@@ -65,8 +69,10 @@
         </c:choose>
         </tbody>
     </table>
-        <input type="submit" name="action" value="Ajouter" class="btn btn-primary"/>
-        <input type="submit" name="action" value="Users Archiver" class="btn btn-primary"/>
+        <div style="display: flex;gap:8px">
+            <input type="submit" name="action" value="Ajouter un utilisateur" style="background-color: #8B785C;border-radius: 8px;font-size: 26px;"/>
+            <input type="submit" name="action" value="Utilisateurs archivés" style="background-color: #8B785C;border-radius: 8px;font-size: 26px;"/>
+        </div>
     </form>
 </div>
 
