@@ -68,6 +68,7 @@
         </table>
         <input type="submit" name="action" value="Ajouter" class="btn btn-primary"/>
         <input type="submit" name="action" value="Apprentis archives" class="btn btn-primary"/>
+        <input type="submit" name="action" value="restFul" class="btn btn-primary"/>
     </form>
 </div>
 

@@ -6,5 +6,6 @@ public class Company {
     private String address;
     private String accessInfo;
 
+
 // getters et setters
 }

@@ -1,5 +1,6 @@
 package fr.efrei2023.ASTA.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import fr.efrei2023.ASTA.model.entity.CompanyEntity;
 import fr.efrei2023.ASTA.model.entity.ProgramEntity;
 import fr.efrei2023.ASTA.model.entity.UserEntity;
@@ -16,6 +17,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 import java.util.Objects;
 
@@ -63,10 +65,22 @@ public class UserController extends HttpServlet {
                     moveToPage(PAGE_ADD_USER, request, response);
                 }
                 break;
+            case ACTION_RESTFUL:
+                getJson(response);
+                break;
             default:
                 request.getSession().setAttribute("errorMessage", "");
                 request.getRequestDispatcher(PAGE_INDEX).forward(request, response);
         }
+    }
+    private void getJson(HttpServletResponse response) throws IOException {
+        String  user = "USER";
+        String userJson = new ObjectMapper().writeValueAsString(user);
+        response.setContentType("application/json");
+        PrintWriter out = response.getWriter();
+        out.print(userJson);
+        out.flush();
+        response.setStatus(HttpServletResponse.SC_OK);
     }
 
     private void settingInfosOfAllCompaniesAndPrograms(HttpServletRequest request) {
