@@ -2,10 +2,12 @@ package fr.efrei2023.ASTA.model.sessionbean;
 
 import fr.efrei2023.ASTA.model.entity.MissionEntity;
 import fr.efrei2023.ASTA.utils.EntityManagerFactoryUtil;
+import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Query;
 
+import javax.ejb.EJB;
 import java.util.List;
 
 public class MissionSessionBean {

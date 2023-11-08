@@ -10,15 +10,7 @@
 
         <servlet-name>apprenticeController</servlet-name>
         <servlet-class>fr.efrei2023.ASTA.controller.ApprenticeController</servlet-class>
-        <init-param>
-            <param-name>jersey.config.server.provider.packages</param-name>
-            <param-value>fr.efrei2023.ASTA</param-value>
-        </init-param>
-        <init-param>
-            <param-name>jersey.config.server.provider.scanning.recursive</param-name>
-            <param-value>true</param-value>
-        </init-param>
-        <load-on-startup>1</load-on-startup>
+
     </servlet>
 
     <servlet-mapping>

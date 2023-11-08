@@ -6,14 +6,14 @@ import fr.efrei2023.ASTA.model.entity.UserEntity;
 import fr.efrei2023.ASTA.model.sessionbean.CompanySessionBean;
 import fr.efrei2023.ASTA.model.sessionbean.ProgramSessionBean;
 import fr.efrei2023.ASTA.model.sessionbean.UserSessionBean;
-import jakarta.ejb.EJB;
-import jakarta.servlet.ServletContext;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
+import javax.ejb.EJB;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.util.List;
@@ -78,7 +78,7 @@ public class UserController extends HttpServlet {
     private void moveToPage(String page, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         switch (page) {
             case PAGE_ALL_USERS:
-                userSessionBean.createNewUser(request, userConnected.getId());
+                userSessionBean.createNewUser((jakarta.servlet.http.HttpServletRequest) request, userConnected.getId());
                 settingInfosOfAllUsersAndUserConnected(request);
                 request.getRequestDispatcher(page).forward(request, response);
                 break;
