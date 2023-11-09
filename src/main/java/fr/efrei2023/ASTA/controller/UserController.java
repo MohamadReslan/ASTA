@@ -75,7 +75,8 @@ public class UserController extends HttpServlet {
     private void moveToPage(String page, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         switch (page) {
             case PAGE_ALL_USERS:
-                userSessionBean.createNewUser(request, userConnected.getId());
+                UserEntity userEntity = getNewUserWithRequest(request);
+                userSessionBean.createNewUser(userEntity, userConnected.getId());
                 settingInfosOfAllUsersAndUserConnected(request);
                 request.getRequestDispatcher(page).forward(request, response);
                 break;
@@ -87,6 +88,17 @@ public class UserController extends HttpServlet {
             default:
 
         }
+    }
+
+    private UserEntity getNewUserWithRequest(HttpServletRequest request) {
+        UserEntity userEntity = new UserEntity();
+        userEntity.setLastName(request.getParameter("lastname"));
+        userEntity.setFirstName(request.getParameter("name"));
+        userEntity.setPhone(request.getParameter("phone"));
+        userEntity.setMail(request.getParameter(FIELD_MAIL));
+        userEntity.setProgramId(Integer.valueOf(request.getParameter("selectPrograms")));
+        userEntity.setCompanyId(Integer.valueOf(request.getParameter("selectCompanies")));
+        return userEntity;
     }
 
     private void moveToNextPage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
