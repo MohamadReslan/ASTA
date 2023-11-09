@@ -1,12 +1,17 @@
 fetch('/ASTA/apprentices')
     .then(response => response.json())
     .then(data => {
-        const divContent = "<span class='row d-flex'>Prénom : " + data.firstName + "</span>" +
-            "</br><span class='row d-flex'>Nom : " + data.lastName + "</span></br><span class='row d-flex'>Téléphone : " +
-            data.phone + "</span></br><span class='row d-flex'>Mail : " +
-            data.mail + "</span></br><span class='row d-flex'>Entreprise : " +
-            data.companyName + "</span></br><span class='row d-flex'>Programme : " + data.programName + "</span>";
+        const divContent = styleInput("Prénom", data.firstName) + styleInput("Nom", data.lastName) +
+            styleInput("Téléphone", data.phone) + styleInput("Mail", data.mail) +
+            styleInput("Maitre d'apprentissage", data.managerName) + styleInput("Entreprise", data.companyName) + styleInput("Programme", data.programName);
 
         document.getElementById("title").innerHTML = "Détails de : " + data.firstName + " " + data.lastName;
         document.getElementById("content").innerHTML = divContent;
-    })
+    });
+
+function styleInput(name, value) {
+    return "<div class='input-group mb-3' style='width: 100%'>" +
+        "<span class='input-group-text' style='width: 50%'>" + name + "</span>" +
+        "<input disabled readonly type='text' class='form-control' placeholder='" + value + "' style='background-color: white;'/>" +
+        "</div>";
+}
