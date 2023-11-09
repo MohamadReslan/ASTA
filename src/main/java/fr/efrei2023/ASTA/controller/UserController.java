@@ -119,6 +119,7 @@ public class UserController extends HttpServlet {
         userEntity.setLastName(request.getParameter("lastname"));
         userEntity.setFirstName(request.getParameter("name"));
         userEntity.setPhone(request.getParameter("phone"));
+        userEntity.setManagerName(request.getParameter("manager"));
         userEntity.setMail(request.getParameter(FIELD_MAIL));
         userEntity.setProgramId(Integer.valueOf(request.getParameter("selectPrograms")));
         userEntity.setCompanyId(Integer.valueOf(request.getParameter("selectCompanies")));

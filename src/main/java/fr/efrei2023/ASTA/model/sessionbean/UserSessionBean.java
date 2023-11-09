@@ -79,8 +79,8 @@ public class UserSessionBean {
 
     public void createNewUser(UserEntity user, int connectedId) {
         em.getTransaction().begin();
-        Query q = em.createNativeQuery("INSERT INTO user(last_name, first_name,mdp,phone,mail,type,is_active,company_id,program_id,related_user_id,is_archive) " +
-                "VALUES(?1, ?2, 123, ?4, ?5, 'apprenti', 1, ?8, ?9, ?10, 0)");
+        Query q = em.createNativeQuery("INSERT INTO user(last_name, first_name,mdp,phone,mail,type,is_active,company_id,program_id,related_user_id,is_archive,manager_name) " +
+                "VALUES(?1, ?2, 123, ?4, ?5, 'apprenti', 1, ?8, ?9, ?10, 0, ?11)");
         q.setParameter(1, user.getLastName());
         q.setParameter(2, user.getFirstName());
         q.setParameter(4, user.getPhone());
@@ -88,6 +88,7 @@ public class UserSessionBean {
         q.setParameter(8, user.getCompanyId());
         q.setParameter(9, user.getProgramId());
         q.setParameter(10, connectedId);
+        q.setParameter(11, user.getManagerName());
         q.executeUpdate();
         em.getTransaction().commit();
     }

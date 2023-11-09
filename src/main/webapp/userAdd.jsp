@@ -33,6 +33,9 @@
                                     <input class="form-control" placeholder="Email" name="email" type="">
                                 </div>
                                 <div class="form-group">
+                                    <input class="form-control" placeholder="Nom du maitre d'apprentissage" name="manager" type="">
+                                </div>
+                                <div class="form-group">
                                     <select   style="width: 100%" name="selectCompanies">
                                         <c:forEach items="${allCompanies}" var="company">
                                             <option name="companyId" value="${company.id}">${company.name}</option>
