@@ -24,6 +24,7 @@ public class UserController extends HttpServlet {
     @EJB
     private ProgramSessionBean programSessionBean;
     private UserEntity userConnected;
+    private UserEntity apprentice;
 
     public UserController() {
     }
@@ -65,6 +66,24 @@ public class UserController extends HttpServlet {
                     moveToPage(PAGE_ADD_USER, request, response);
                 }
                 break;
+
+            case ACTION_MODIFICATION:
+
+                userSessionBean.modifierUSer(Integer.parseInt(request.getParameter("userId")),request);
+
+                List<UserEntity> allUsers = userSessionBean.getAllRelatedUsersByUser(userConnected.getId());
+                request.setAttribute("allUsers", allUsers);
+                request.getRequestDispatcher(PAGE_ALL_USERS).forward(request, response);
+                break;
+
+            case ACTION_PAGE_MODIFIER:
+
+                apprentice = userSessionBean.getUserById(Integer.parseInt(request.getParameter("userId")));
+                request.setAttribute("apprentice", apprentice);
+                settingInfosOfAllCompaniesAndPrograms(request);
+                request.getRequestDispatcher(PAGE_MODIFICATION_USER).forward(request, response);
+                break;
+
             default:
                 request.getSession().setAttribute("errorMessage", "");
                 request.getRequestDispatcher(PAGE_INDEX).forward(request, response);
