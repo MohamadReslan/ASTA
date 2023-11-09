@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ include file="header.jsp" %>
+<%@ include file="dependancies.jsp" %>
 <html>
 <head>
     <title>Accueil</title>
@@ -48,12 +48,12 @@
                                 <td>${user.phone}</td>
                                 <td>${user.mail}</td>
                                 <td>
-                                    <form action="user-controller" method="post" id="archive-form">
+                                    <form action="<%= UsersConstants.FORM_USER_CONTROLLER %>" method="post" id="archive-form">
                                         <input type="hidden" id="userId" name="userId" value=${user.id}>
-                                        <button class="archive-button btn btn-primary" type="submit" name="action" value="Archiver" data-userid="${user.id}" >
+                                        <button class="archive-button btn btn-primary" type="submit" name="action" value="<%= UsersConstants.ACTION_ARCHIVER %>" data-userid="${user.id}" >
                                             Archiver
                                         </button>
-                                        <button class="btn btn-primary" name="action" value="Detail" data-userid="${user.id}">
+                                        <button class="btn btn-primary" name="action" value="<%= UsersConstants.ACTION_DETAIL %>" data-userid="${user.id}">
                                             Détails
                                         </button>
                                     </form>
@@ -70,8 +70,8 @@
             </c:choose>
             </tbody>
         </table>
-        <input type="submit" name="action" value="Ajouter" class="btn btn-primary"/>
-        <input type="submit" name="action" value="Apprentis archives" class="btn btn-primary"/>
+        <input type="submit" name="action" value="<%= UsersConstants.ACTION_AJOUTER %>" class="btn btn-primary"/>
+        <input type="submit" name="action" value="<%= UsersConstants.ACTION_APPRENTICE_ARCHIVER %>" class="btn btn-primary"/>
     </form>
 </div>
 

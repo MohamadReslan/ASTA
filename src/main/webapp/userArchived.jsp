@@ -1,4 +1,4 @@
-<%@ include file="header.jsp" %>
+<%@ include file="dependancies.jsp" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>

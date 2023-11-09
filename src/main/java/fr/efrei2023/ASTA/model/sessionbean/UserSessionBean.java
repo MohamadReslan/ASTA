@@ -1,8 +1,6 @@
 package fr.efrei2023.ASTA.model.sessionbean;
 
 import fr.efrei2023.ASTA.model.Model.UserInfoModel;
-import fr.efrei2023.ASTA.model.bean.Program;
-import fr.efrei2023.ASTA.model.bean.User;
 import fr.efrei2023.ASTA.model.entity.CompanyEntity;
 import fr.efrei2023.ASTA.model.entity.ProgramEntity;
 import fr.efrei2023.ASTA.model.entity.UserEntity;
@@ -17,7 +15,7 @@ import jakarta.servlet.http.HttpServletRequest;
 
 import java.util.List;
 
-import static fr.efrei2023.ASTA.utils.UsersConstantes.FIELD_MAIL;
+import static fr.efrei2023.ASTA.utils.UsersConstants.FIELD_MAIL;
 
 @Stateless
 public class UserSessionBean {
@@ -74,22 +72,16 @@ public class UserSessionBean {
         return q.getResultList();
     }
 
-    public void createNewUser(HttpServletRequest request, int connectedId) {
-        String lastname = request.getParameter("lastname");
-        String name = request.getParameter("name");
-        String phone = request.getParameter("phone");
-        String email = request.getParameter(FIELD_MAIL);
-        String programId = request.getParameter("selectPrograms");
-        String companyId = request.getParameter("selectCompanies");
+    public void createNewUser(UserEntity user, int connectedId) {
         em.getTransaction().begin();
         Query q = em.createNativeQuery("INSERT INTO user(last_name, first_name,mdp,phone,mail,type,is_active,company_id,program_id,related_user_id,is_archive) " +
                 "VALUES(?1, ?2, 123, ?4, ?5, 'apprenti', 1, ?8, ?9, ?10, 0)");
-        q.setParameter(1, lastname);
-        q.setParameter(2, name);
-        q.setParameter(4, phone);
-        q.setParameter(5, email);
-        q.setParameter(8, companyId);
-        q.setParameter(9, programId);
+        q.setParameter(1, user.getLastName());
+        q.setParameter(2, user.getFirstName());
+        q.setParameter(4, user.getPhone());
+        q.setParameter(5, user.getMail());
+        q.setParameter(8, user.getCompanyId());
+        q.setParameter(9, user.getProgramId());
         q.setParameter(10, connectedId);
         q.executeUpdate();
         em.getTransaction().commit();
