@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ include file="dependancies.jsp" %>
+<%@ include file="WEB-INF/dependancies.jsp" %>
 <head>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" rel="stylesheet"
           id="bootstrap-css">
