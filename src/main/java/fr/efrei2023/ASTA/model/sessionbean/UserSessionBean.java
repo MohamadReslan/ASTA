@@ -57,7 +57,7 @@ public class UserSessionBean {
         UserEntity user = getUserById(userId);
         CompanyEntity company = companySessionBean.getCompanyById(user.getCompanyId());
         ProgramEntity program = programSessionBean.getProgramById(user.getProgramId());
-        return new UserInfoModel(user.getId(), user.getLastName(), user.getFirstName(), user.getPhone(), user.getMail(), company.getName(), program.getLabel());
+        return new UserInfoModel(user, company.getName(), program.getLabel());
     }
 
     public void updateUserArchive(int userId) {

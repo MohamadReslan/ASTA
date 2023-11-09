@@ -25,6 +25,9 @@ public class UserEntity {
     @Column(name = "mail")
     private String mail;
     @Basic
+    @Column(name = "manager_name")
+    private String managerName;
+    @Basic
     @Column(name = "type")
     private String type;
     @Basic
@@ -90,6 +93,13 @@ public class UserEntity {
     public void setMail(String mail) {
         this.mail = mail;
     }
+    public String getManagerName() {
+        return managerName;
+    }
+
+    public void setManagerName(String managerName) {
+        this.managerName = managerName;
+    }
 
     public String getType() {
         return type;
@@ -152,6 +162,7 @@ public class UserEntity {
         if (mdp != null ? !mdp.equals(that.mdp) : that.mdp != null) return false;
         if (phone != null ? !phone.equals(that.phone) : that.phone != null) return false;
         if (mail != null ? !mail.equals(that.mail) : that.mail != null) return false;
+        if (managerName != null ? !managerName.equals(that.managerName) : that.managerName != null) return false;
         if (type != null ? !type.equals(that.type) : that.type != null) return false;
         if (isActive != null ? !isActive.equals(that.isActive) : that.isActive != null) return false;
         if (isArchive != null ? !isArchive.equals(that.isArchive) : that.isArchive != null) return false;
@@ -171,6 +182,7 @@ public class UserEntity {
         result = 31 * result + (mdp != null ? mdp.hashCode() : 0);
         result = 31 * result + (phone != null ? phone.hashCode() : 0);
         result = 31 * result + (mail != null ? mail.hashCode() : 0);
+        result = 31 * result + (managerName != null ? managerName.hashCode() : 0);
         result = 31 * result + (type != null ? type.hashCode() : 0);
         result = 31 * result + (isActive != null ? isActive.hashCode() : 0);
         result = 31 * result + (isArchive != null ? isArchive.hashCode() : 0);
