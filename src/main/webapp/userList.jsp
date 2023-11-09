@@ -15,8 +15,7 @@
 </head>
 <body>
 <div class="content m-16" style="background-color: white;width: 95%; padding: 20px;margin: 25px">
-    <div style="display: flex;gap:4px"><h3>Bonjour</h3><h3 style="font-weight: bold">${userConnected.firstName} ${userConnected.lastName} !</h3></div>
-    <h2>Liste des apprentis</h2>
+    <h3 style="text-align: center">Liste des apprentis</h3>
     <form method="post" action="user-controller">
         <table id="table"
                data-toggle="table"

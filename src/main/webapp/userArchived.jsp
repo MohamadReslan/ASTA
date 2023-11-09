@@ -11,10 +11,9 @@
     <title>Page Apprenti Archivé</title>
 </head>
 <body>
-<h3>Bonjour ${userConnected.firstName} ${userConnected.lastName} !</h3>
-<h3>Liste des apprentis archivés</h3>
-<div class="content m-16">
-
+<div class="content m-16" style="background-color: white;width: 95%; padding: 20px;margin: 25px">
+<h3 style="text-align: center">Liste des apprentis archivés</h3>
+<div>
     <table id="table"
            data-toggle="table"
            data-height="460"
@@ -51,8 +50,7 @@
         </c:choose>
         </tbody>
     </table>
+    </div>
 </div>
-
-
 </body>
 </html>
