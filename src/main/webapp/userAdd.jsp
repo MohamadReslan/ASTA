@@ -14,7 +14,7 @@
                 <div class="card shadow-2-strong" style="border-radius: 1rem;">
                     <div class="p-5 text-center" style="">
                         <h3 class="mb-5">Ajouter un nouvel apprenti</h3>
-                        <form class="row d-flex justify-content-center text-center" action="user-controller"
+                        <form class="row d-flex justify-content-center text-center" action="<%= UsersConstants.FORM_USER_CONTROLLER %>"
                               method="post">
                             <fieldset>
                                 <div class="form-group">
@@ -45,7 +45,7 @@
                                     </select>
                                 </div>
 
-                                <input type="submit" name="action" value="Ajouter l'apprenti" class="btn btn-primary"/>
+                                <input type="submit" name="action" value="<%= UsersConstants.ACTION_AJOUTER_APPRENTI %>" class="btn btn-primary"/>
                                 <div style="color:red">
                                     ${errorMessage}
                                 </div>

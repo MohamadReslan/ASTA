@@ -1,8 +1,6 @@
 package fr.efrei2023.ASTA.model.sessionbean;
 
 import fr.efrei2023.ASTA.model.Model.UserInfoModel;
-import fr.efrei2023.ASTA.model.bean.Program;
-import fr.efrei2023.ASTA.model.bean.User;
 import fr.efrei2023.ASTA.model.entity.CompanyEntity;
 import fr.efrei2023.ASTA.model.entity.ProgramEntity;
 import fr.efrei2023.ASTA.model.entity.UserEntity;
@@ -17,7 +15,7 @@ import jakarta.servlet.http.HttpServletRequest;
 
 import java.util.List;
 
-import static fr.efrei2023.ASTA.utils.UsersConstantes.FIELD_MAIL;
+import static fr.efrei2023.ASTA.utils.UsersConstants.FIELD_MAIL;
 
 @Stateless
 public class UserSessionBean {
