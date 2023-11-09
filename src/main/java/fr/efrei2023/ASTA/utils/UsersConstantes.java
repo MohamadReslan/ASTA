@@ -2,6 +2,7 @@ package fr.efrei2023.ASTA.utils;
 
 public class UsersConstantes {
     public static final String ACTION = "action";
+    public static final String ACTION_DETAIL = "Detail";
     public static final String ACTION_LOGIN = "Login";
     public static final String ACTION_AJOUTER = "Ajouter";
     public static final String ACTION_ARCHIVER = "Archiver";

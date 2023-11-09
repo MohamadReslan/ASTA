@@ -1,8 +1,13 @@
 package fr.efrei2023.ASTA.model.sessionbean;
 
+import fr.efrei2023.ASTA.model.Model.UserInfoModel;
+import fr.efrei2023.ASTA.model.bean.Program;
 import fr.efrei2023.ASTA.model.bean.User;
+import fr.efrei2023.ASTA.model.entity.CompanyEntity;
+import fr.efrei2023.ASTA.model.entity.ProgramEntity;
 import fr.efrei2023.ASTA.model.entity.UserEntity;
 import fr.efrei2023.ASTA.utils.EntityManagerFactoryUtil;
+import jakarta.ejb.EJB;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
@@ -18,6 +23,12 @@ import static fr.efrei2023.ASTA.utils.UsersConstantes.FIELD_MAIL;
 public class UserSessionBean {
     EntityManagerFactory entityManagerFactory = EntityManagerFactoryUtil.getEntityManagerFactory();
     EntityManager em = entityManagerFactory.createEntityManager();
+
+    @EJB
+    private CompanySessionBean companySessionBean;
+
+    @EJB
+    private ProgramSessionBean programSessionBean;
 
     public List<UserEntity> getAllUsers() {
         return em.createQuery("SELECT u from UserEntity u").getResultList();
@@ -40,6 +51,13 @@ public class UserSessionBean {
     public UserEntity getUserById(int userId) {
         Query q = em.createQuery("SELECT u FROM UserEntity u WHERE u.id = :id").setParameter("id", userId);
         return (UserEntity) q.getSingleResult();
+    }
+
+    public UserInfoModel getUserInfo(int userId) {
+        UserEntity user = getUserById(userId);
+        CompanyEntity company = companySessionBean.getCompanyById(user.getCompanyId());
+        ProgramEntity program = programSessionBean.getProgramById(user.getProgramId());
+        return new UserInfoModel(user.getId(), user.getLastName(), user.getFirstName(), user.getPhone(), user.getMail(), company.getName(), program.getLabel());
     }
 
     public void updateUserArchive(int userId) {

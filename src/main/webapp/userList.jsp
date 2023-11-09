@@ -7,6 +7,7 @@
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <link href="https://unpkg.com/bootstrap-table@1.22.1/dist/bootstrap-table.min.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- Add jQuery -->
+    <script src="jquery-3.7.1.min.js"></script>
     <script src="https://unpkg.com/bootstrap-table@1.22.1/dist/bootstrap-table.min.js"></script>
 </head>
 <body style="margin: 4px">
@@ -52,6 +53,9 @@
                                         <button class="archive-button btn btn-primary" type="submit" name="action" value="Archiver" data-userid="${user.id}" >
                                             Archiver
                                         </button>
+                                        <button class="btn btn-primary" name="action" value="Detail" data-userid="${user.id}">
+                                            Détails
+                                        </button>
                                     </form>
                                 </td>
                             </tr>
@@ -68,7 +72,6 @@
         </table>
         <input type="submit" name="action" value="Ajouter" class="btn btn-primary"/>
         <input type="submit" name="action" value="Apprentis archives" class="btn btn-primary"/>
-        <input type="submit" name="action" value="restFul" class="btn btn-primary"/>
     </form>
 </div>
 

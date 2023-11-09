@@ -6,7 +6,7 @@ public class User {
     private String motDePasseSaisi;
 
     // New
-    private int id; //coucou maximussss
+    private int id;
     private String lastName;
     private String firstName;
     private String phone;

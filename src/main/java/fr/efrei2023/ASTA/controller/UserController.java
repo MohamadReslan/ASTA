@@ -49,6 +49,10 @@ public class UserController extends HttpServlet {
                 request.getSession().setAttribute("allUsers", userSessionBean.getAllRelatedUsersByUser(userConnected.getId()));
                 request.getRequestDispatcher(PAGE_ALL_USERS).forward(request, response);
                 break;
+            case ACTION_DETAIL:
+                request.getSession().setAttribute("apprenticeSelected", request.getParameter("userId"));
+                request.getRequestDispatcher("html/restFul.html").forward(request, response);
+                break;
             case ACTION_APPRENTICE_ARCHIVER:
                 request.getSession().setAttribute("userConnected", userConnected);
                 request.getSession().setAttribute("allArchivedUsers", userSessionBean.getAllArchivedUsers());
@@ -65,22 +69,10 @@ public class UserController extends HttpServlet {
                     moveToPage(PAGE_ADD_USER, request, response);
                 }
                 break;
-            case ACTION_RESTFUL:
-                getJson(response);
-                break;
             default:
                 request.getSession().setAttribute("errorMessage", "");
                 request.getRequestDispatcher(PAGE_INDEX).forward(request, response);
         }
-    }
-    private void getJson(HttpServletResponse response) throws IOException {
-        String  user = "USER";
-        String userJson = new ObjectMapper().writeValueAsString(user);
-        response.setContentType("application/json");
-        PrintWriter out = response.getWriter();
-        out.print(userJson);
-        out.flush();
-        response.setStatus(HttpServletResponse.SC_OK);
     }
 
     private void settingInfosOfAllCompaniesAndPrograms(HttpServletRequest request) {
