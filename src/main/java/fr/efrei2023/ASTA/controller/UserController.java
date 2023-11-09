@@ -101,8 +101,8 @@ public class UserController extends HttpServlet {
                 settingInfosOfAllUsersAndUserConnected(request);
                 request.getRequestDispatcher(PAGE_ALL_USERS).forward(request, response);
             } else {
-                request.getSession().setAttribute("utilisateur", userSessionBean.getUserById(userConnected.getId()));
-                request.getRequestDispatcher("bienvenue.jsp").forward(request, response);
+                request.getSession().setAttribute("userConnected", userSessionBean.getUserById(userConnected.getId()));
+                request.getRequestDispatcher("userInfo.jsp").forward(request, response);
             }
         } else {
             request.getSession().setAttribute("errorMessage", ERROR_MESSAGE_CREDENTIALS_KO);
