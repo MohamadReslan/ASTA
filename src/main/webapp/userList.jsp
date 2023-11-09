@@ -85,5 +85,6 @@
         locale: "fr-FR",
     })
 </script>
+
 </body>
 </html>

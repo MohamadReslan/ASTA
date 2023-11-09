@@ -9,9 +9,13 @@
 <%@ include file="header.jsp" %>
 <html>
 <head>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" rel="stylesheet"
-        id="bootstrap-css">
-    <title>Title</title>
+
+  <title>Title</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- Add jQuery -->
+  <script src="jquery-3.7.1.min.js"></script>
+  <script src="https://unpkg.com/bootstrap-table@1.22.1/dist/bootstrap-table.min.js"></script>
+
 </head>
 <body>
 <section class="row d-flex justify-content-center" style="background-color: #508bfc;width: 100%;height: 100%">
@@ -60,7 +64,9 @@
                   </select>
                 </div>
 
-                <button type="submit" name="action" value="modification" class="btn btn-primary">Modifier</button>
+                <button class="modification-button btn btn-primary" type="submit" name="action" value="modification">
+                  Modifier
+                </button>
 
               </fieldset>
               <input name="userId" value="${apprentice.id}" type="text" hidden="hidden">
