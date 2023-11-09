@@ -50,6 +50,10 @@ public class UserController extends HttpServlet {
                 request.getSession().setAttribute("allArchivedUsers", userSessionBean.getAllArchivedUsers());
                 request.getRequestDispatcher(PAGE_ARCHIVED_USER).forward(request, response);
                 break;
+            case ACTION_HOME:
+                settingInfosOfAllUsersAndUserConnected(request);
+                request.getRequestDispatcher(PAGE_ALL_USERS).forward(request, response);
+                break;
             case ACTION_AJOUTER:
                 settingInfosOfAllCompaniesAndPrograms(request);
                 request.getRequestDispatcher(PAGE_ADD_USER).forward(request, response);

@@ -31,14 +31,14 @@
                                     <input class="form-control" placeholder="Email" name="email" type="">
                                 </div>
                                 <div class="form-group">
-                                    <select name="selectCompanies">
+                                    <select   style="width: 100%" name="selectCompanies">
                                         <c:forEach items="${allCompanies}" var="company">
                                             <option name="companyId" value="${company.id}">${company.name}</option>
                                         </c:forEach>
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <select name="selectPrograms">
+                                    <select style="width: 100%" name="selectPrograms">
                                         <c:forEach items="${allPrograms}" var="program">
                                             <option name="programId" value="${program.id}">${program.label}</option>
                                         </c:forEach>

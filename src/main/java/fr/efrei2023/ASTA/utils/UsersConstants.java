@@ -5,6 +5,7 @@ public class UsersConstants {
     public static final String ACTION_DETAIL = "Detail";
     public static final String ACTION_LOGIN = "Login";
     public static final String ACTION_AJOUTER = "Ajouter";
+    public static final String ACTION_HOME = "Home";
     public static final String ACTION_ARCHIVER = "Archiver";
     public static final String ACTION_APPRENTICE_ARCHIVER = "Apprentis archives";
     public static final String ACTION_AJOUTER_APPRENTI = "Ajouter l'apprenti";
