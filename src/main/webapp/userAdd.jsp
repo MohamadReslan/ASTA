@@ -2,13 +2,12 @@
 <%@ include file="header.jsp" %>
 <html>
 <head>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" rel="stylesheet"
-          id="bootstrap-css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <title>Ajout d'apprenti</title>
 </head>
 <body>
 <section class="row d-flex justify-content-center" style="background-color: #508bfc;width: 100%;height: 100%">
-    <div class="container py-5 h-100">
+    <div class="container py-5 h-100 w-100">
         <div class="row d-flex justify-content-center align-items-center h-100">
             <div>
                 <div class="card shadow-2-strong" style="border-radius: 1rem;">
