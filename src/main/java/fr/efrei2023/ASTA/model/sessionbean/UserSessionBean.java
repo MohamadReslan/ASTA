@@ -2,6 +2,7 @@ package fr.efrei2023.ASTA.model.sessionbean;
 
 import fr.efrei2023.ASTA.model.Model.UserInfoModel;
 import fr.efrei2023.ASTA.model.entity.CompanyEntity;
+import fr.efrei2023.ASTA.model.entity.MissionEntity;
 import fr.efrei2023.ASTA.model.entity.ProgramEntity;
 import fr.efrei2023.ASTA.model.entity.UserEntity;
 import fr.efrei2023.ASTA.utils.EntityManagerFactoryUtil;
@@ -13,6 +14,7 @@ import jakarta.persistence.NoResultException;
 import jakarta.persistence.Query;
 import jakarta.servlet.http.HttpServletRequest;
 
+import javax.swing.*;
 import java.util.List;
 
 import static fr.efrei2023.ASTA.utils.UsersConstants.FIELD_MAIL;
@@ -27,6 +29,8 @@ public class UserSessionBean {
 
     @EJB
     private ProgramSessionBean programSessionBean;
+    @EJB
+    private MissionSessionBean missionSessionBean;
 
     public List<UserEntity> getAllUsers() {
         return em.createQuery("SELECT u from UserEntity u").getResultList();
@@ -55,7 +59,8 @@ public class UserSessionBean {
         UserEntity user = getUserById(userId);
         CompanyEntity company = companySessionBean.getCompanyById(user.getCompanyId());
         ProgramEntity program = programSessionBean.getProgramById(user.getProgramId());
-        return new UserInfoModel(user, company.getName(), program.getLabel());
+        MissionEntity mission = missionSessionBean.getMissionByUserId(user.getId());
+        return new UserInfoModel(user, company.getName(), program.getLabel(), mission);
     }
 
     public void updateUserArchive(int userId) {

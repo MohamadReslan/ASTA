@@ -35,9 +35,9 @@ CREATE TABLE COMPANY(
                         PRIMARY KEY(id)
 );
 
-INSERT INTO COMPANY VALUES (1, 'Bouygues', '10 rue du chaperon vert PARIS 75015', 'Batiment A - étage 3'),
-                           (2, 'Crédit agricole', '50 avenue du parc PARIS 75008', 'Badge'),
-                           (3, 'Dassault System', '30 boulevard du maine PARIS 75018', 'Pièce didentité'),
+INSERT INTO COMPANY VALUES (1, 'Bouygues', '10 rue du chaperon vert PARIS 75015', 'Batiment A - etage 3'),
+                           (2, 'Credit agricole', '50 avenue du parc PARIS 75008', 'Badge'),
+                           (3, 'Dassault System', '30 boulevard du maine PARIS 75018', 'Piece didentite'),
                            (4, 'Karyon', '5 rue de la plaine  PARIS 75010', 'Interphone code 98532'),
                            (5, 'Clever age', '32 rue blanche PARIS 75002', 'Badge'),
                            (6, 'Gudule', '96 rue le dantec PARIS 75013', 'Porte 3');
@@ -90,16 +90,16 @@ CREATE TABLE EVALUATION(
                            FOREIGN KEY(id_1) REFERENCES USER(id)
 );
 
-INSERT INTO EVALUATION VALUES (1, 16.0, 'mémoire', '2023-01-15', 'Très bien', 'création dun site', 1),
+INSERT INTO EVALUATION VALUES (1, 16.0, 'memoire', '2023-01-15', 'Tres bien', 'creation dun site', 1),
                               (2, 14.5, 'soutenance', '2023-03-10', 'Bien', 'nouvelle application', 2),
-                              (3, 17.2, 'mémoire', '2023-05-20', 'Excellent', 'gérer une base de données', 3),
-                              (4, 13.8, 'soutenance', '2023-07-05', 'Assez bien', 'sécurisation dun serveur', 4),
-                              (5, 15.7, 'mémoire', '2023-09-12', 'Très satisfaisant', 'design d une nouvelle interface client', 5),
-                              (6, 18.3, 'soutenance', '2023-11-08', 'Très bien', 'comment maintenir un réseau entreprise', 6),
-                              (7, 14.0, 'mémoire', '2023-02-18', 'Bien', 'developper un logiciel', 7),
-                              (8, 16.8, 'soutenance', '2023-04-30', 'Très bien', 'faire un support technique', 8),
-                              (9, 13.2, 'mémoire', '2023-08-14', 'Assez bien', 'créer une stratégie marketing', 9),
-                              (10, 17.5, 'soutenance', '2023-10-22', 'Excellent', 'protéger des données sensibles', 10);
+                              (3, 17.2, 'memoire', '2023-05-20', 'Excellent', 'gerer une base de donnees', 3),
+                              (4, 13.8, 'soutenance', '2023-07-05', 'Assez bien', 'securisation dun serveur', 4),
+                              (5, 15.7, 'memoire', '2023-09-12', 'Tres satisfaisant', 'design d une nouvelle interface client', 5),
+                              (6, 18.3, 'soutenance', '2023-11-08', 'Tres bien', 'comment maintenir un reseau entreprise', 6),
+                              (7, 14.0, 'memoire', '2023-02-18', 'Bien', 'developper un logiciel', 7),
+                              (8, 16.8, 'soutenance', '2023-04-30', 'Tres bien', 'faire un support technique', 8),
+                              (9, 13.2, 'memoire', '2023-08-14', 'Assez bien', 'creer une strategie marketing', 9),
+                              (10, 17.5, 'soutenance', '2023-10-22', 'Excellent', 'proteger des donnees sensibles', 10);
 
 
 CREATE TABLE MISSION(
@@ -107,19 +107,19 @@ CREATE TABLE MISSION(
     keyword VARCHAR(50),
     job VARCHAR(50),
     comment VARCHAR(500),
-    id_1 SMALLINT NOT NULL,
+    userId SMALLINT NOT NULL,
     PRIMARY KEY(id),
-    UNIQUE(id_1),
-    FOREIGN KEY(id_1) REFERENCES USER(id)
+    UNIQUE(userId),
+    FOREIGN KEY(userId) REFERENCES USER(id)
 );
 
 INSERT INTO MISSION VALUES (1, 'html, css, js', 'developpeur web', 'developpeur pour notre nouveau site de cuisine', 1),
-                           (2, 'Java', 'Ingénieur logiciel', 'Développement dune application Java', 2),
-                              (3, 'sql, python', 'Data Analyst', 'Analyse des données de vente', 3),
-                              (4, 'système', 'Administrateur système', 'Gestion des serveurs et de la sécurité', 4),
-                              (5, 'concepteur', 'Designer UX/UI', 'Conception de linterface utilisateur pour une application mobile', 5),
-                           (6, 'réseau', 'Ingénieur réseau', 'Configuration et maintenance du réseau dentreprise', 6),
-                              (7, 'C#', 'Développeur logiciel', 'Développement dun logiciel de gestion des stocks', 7),
+                           (2, 'Java', 'Ingenieur logiciel', 'Developpement dune application Java', 2),
+                              (3, 'sql, python', 'Data Analyst', 'Analyse des donnees de vente', 3),
+                              (4, 'systeme', 'Administrateur systeme', 'Gestion des serveurs et de la securite', 4),
+                              (5, 'concepteur', 'Designer UX/UI', 'Conception de l interface utilisateur pour une application mobile', 5),
+                           (6, 'reseau', 'Ingenieur reseau', 'Configuration et maintenance du reseau d entreprise', 6),
+                              (7, 'C#', 'Developpeur logiciel', 'Developpement dun logiciel de gestion des stocks', 7),
                            (8, 'technicien, support, informatique', 'Technicien support', 'Fournir un support technique aux utilisateurs', 8),
-                           (9, 'marketing', 'Consultant en marketing', 'Conseil en stratégie marketing pour une entreprise cliente', 9),
-                           (10, 'cybersécurité', 'Ingénieur en sécurité', 'Mise en place de mesures de sécurité pour protéger les données sensibles', 10);
+                           (9, 'marketing', 'Consultant en marketing', 'Conseil en strategie marketing pour une entreprise cliente', 9),
+                           (10, 'cybersecurite', 'Ingenieur en securite', 'Mise en place de mesures de securite pour proteger les donnees sensibles', 10);

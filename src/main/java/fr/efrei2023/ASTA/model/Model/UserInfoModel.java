@@ -1,6 +1,7 @@
 package fr.efrei2023.ASTA.model.Model;
 
 import fr.efrei2023.ASTA.model.bean.User;
+import fr.efrei2023.ASTA.model.entity.MissionEntity;
 import fr.efrei2023.ASTA.model.entity.UserEntity;
 
 public class UserInfoModel {
@@ -12,8 +13,9 @@ public class UserInfoModel {
     public String managerName;
     public String companyName;
     public String programName;
+    public MissionEntity mission;
 
-    public UserInfoModel(UserEntity user, String companyName, String programName) {
+    public UserInfoModel(UserEntity user, String companyName, String programName, MissionEntity mission) {
         this.id = user.getId();
         this.lastName = user.getLastName();
         this.firstName = user.getFirstName();
@@ -22,5 +24,6 @@ public class UserInfoModel {
         this.managerName = user.getManagerName();
         this.companyName = companyName;
         this.programName = programName;
+        this.mission = mission;
     }
 }
