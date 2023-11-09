@@ -6,7 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ include file="header.jsp" %>
+<%@ include file="dependancies.jsp" %>
 <html>
 <head>
 
@@ -49,7 +49,7 @@
                 </div>
                 <!--show company from company id!-->
                 <div class="form-group">
-                  <select name="champCompany">
+                  <select style="width: 100%" name="champCompany">
                     <c:forEach items="${allCompanies}" var="company">
                         <option <c:if test="${company.id == apprentice.companyId}">selected="selected"</c:if> name="companyId" value="${company.id}">${company.name}</option>
                     </c:forEach>
@@ -57,7 +57,7 @@
                 </div>
                 <!--show programm from programm id !-->
                 <div class="form-group">
-                  <select name="champProgram">
+                  <select style="width: 100%" name="champProgram">
                     <c:forEach items="${allPrograms}" var="program">
                         <option <c:if test="${program.id == apprentice.programId}">selected="selected"</c:if> name="programId" value="${program.id}">${program.label}</option>
                     </c:forEach>
