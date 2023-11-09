@@ -6,8 +6,11 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <link href="https://unpkg.com/bootstrap-table@1.22.1/dist/bootstrap-table.min.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- Add jQuery -->
-    <script src="jquery-3.7.1.min.js"></script>
     <script src="https://unpkg.com/bootstrap-table@1.22.1/dist/bootstrap-table.min.js"></script>
+    <script src="https://unpkg.com/tableexport.jquery.plugin/tableExport.min.js"></script>
+    <script src="https://unpkg.com/bootstrap-table@1.22.1/dist/bootstrap-table-locale-all.min.js"></script>
+    <script src="https://unpkg.com/bootstrap-table@1.22.1/dist/extensions/export/bootstrap-table-export.min.js"></script>
+    <script src="jquery-3.7.1.min.js"></script>
     <title>Page Apprenti Archivé</title>
 </head>
 <body>
@@ -52,5 +55,10 @@
     </table>
     </div>
 </div>
+<script>
+    $('#table').bootstrapTable({
+        locale: "fr-FR",
+    })
+</script>
 </body>
 </html>
