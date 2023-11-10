@@ -92,8 +92,7 @@ public class UserSessionBean {
         q.executeUpdate();
         em.getTransaction().commit();
     }
-    public void modifierUSer(int userId, HttpServletRequest request) {
-
+    public void modifierUSer(int userId, int tuteurId, HttpServletRequest request) {
         String champLastname = request.getParameter("champLastname");
         String champFirstname = request.getParameter("champFirstname");
         String champMail = request.getParameter("champMail");
@@ -101,23 +100,9 @@ public class UserSessionBean {
         String champPhone = request.getParameter("champPhone");
         String champCompany = request.getParameter("champCompany");
         String champProgram = request.getParameter("champProgram");
+        UserEntity user = new UserEntity((short)userId, champLastname, champFirstname, champPassword, champMail, champPhone, Integer.parseInt(champCompany), Integer.parseInt(champProgram), tuteurId);
         em.getTransaction().begin();
-        Query q = em.createQuery("UPDATE UserEntity SET lastName=:lastname," +
-                        "firstName=:firstname," +
-                        "mail=:mail, " +
-                        "mdp=:mdp, "  +
-                        "phone=:phone," +
-                        "companyId=:companyId," +
-                        "programId=:programId WHERE UserEntity.id = :id ")
-                .setParameter("lastname", champLastname)
-                .setParameter("firstname", champFirstname)
-                .setParameter("mail",champMail)
-                .setParameter("mdp",champPassword)
-                .setParameter("phone", champPhone)
-                .setParameter("companyId",Integer.parseInt(champCompany))
-                .setParameter("programId", Integer.parseInt(champProgram))
-                .setParameter("id",userId);
-        q.executeUpdate();
+        em.merge(user);
         em.getTransaction().commit();
     }
 }

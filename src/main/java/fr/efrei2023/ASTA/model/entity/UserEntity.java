@@ -46,6 +46,22 @@ public class UserEntity {
     @Column(name = "related_user_id")
     private Integer relatedUserId;
 
+    public UserEntity(){}
+    public UserEntity(short id, String lastName, String firstName, String mdp, String mail, String phone, Integer companyId, Integer programId, Integer relatedUserId){
+        this.id = id;
+        this.lastName = lastName;
+        this.firstName = firstName;
+        this.mdp = mdp;
+        this.mail = mail;
+        this.phone = phone;
+        this.companyId = companyId;
+        this.programId = programId;
+        this.isArchive = false;
+        this.isActive = true;
+        this.managerName = "";
+        this.type = "apprenti"; // Ce constructeur est forcément utilisé pour les modifier un apprenti, on pourra rendre ce champ en paramètre dans le futur
+        this.relatedUserId = relatedUserId;
+    }
     public short getId() {
         return id;
     }
