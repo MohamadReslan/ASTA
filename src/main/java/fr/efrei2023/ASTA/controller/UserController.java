@@ -71,7 +71,7 @@ public class UserController extends HttpServlet {
 
             case ACTION_MODIFICATION:
 
-                userSessionBean.modifierUSer(Integer.parseInt(request.getParameter("userId")),request);
+                userSessionBean.modifierUSer(Integer.parseInt(request.getParameter("userId")), userConnected.getId(), request);
 
                 List<UserEntity> allUsers = userSessionBean.getAllRelatedUsersByUser(userConnected.getId());
                 request.setAttribute("allUsers", allUsers);
