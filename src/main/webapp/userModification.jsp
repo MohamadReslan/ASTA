@@ -135,7 +135,6 @@
                             <input name="<%= UsersConstants.FIELD_USER_ID %>" value="${apprentice.id}" type="text"
                                    hidden="hidden">
                         </form>
-
                     </div>
                 </div>
             </div>
@@ -168,6 +167,5 @@
         passwordField.type = "password";
     });
 </script>
-
 </body>
 </html>
