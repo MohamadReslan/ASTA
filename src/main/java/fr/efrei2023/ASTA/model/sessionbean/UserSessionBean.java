@@ -12,12 +12,9 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.NoResultException;
 import jakarta.persistence.Query;
-import jakarta.servlet.http.HttpServletRequest;
-
-import javax.swing.*;
 import java.util.List;
 
-import static fr.efrei2023.ASTA.utils.UsersConstants.FIELD_MAIL;
+import static fr.efrei2023.ASTA.utils.UsersConstants.TYPE_APPRENTICE;
 
 @Stateless
 public class UserSessionBean {
@@ -38,7 +35,9 @@ public class UserSessionBean {
 
     public UserEntity getLoggedUser(String mail, String mdp) {
         try {
-            Query q = em.createQuery("SELECT u FROM UserEntity u WHERE u.mdp = :mdp AND u.mail = :mail").setParameter("mdp", mdp).setParameter("mail", mail);
+            Query q = em.createQuery("SELECT u FROM UserEntity u WHERE u.mdp = :mdp AND u.mail = :mail")
+                        .setParameter("mdp", mdp)
+                        .setParameter("mail", mail);
             return (UserEntity) q.getSingleResult();
         } catch (NoResultException e) {
             return null;
@@ -79,29 +78,30 @@ public class UserSessionBean {
 
     public void createNewUser(UserEntity user, int connectedId) {
         em.getTransaction().begin();
-        Query q = em.createNativeQuery("INSERT INTO user(last_name, first_name,mdp,phone,mail,type,is_active,company_id,program_id,related_user_id,is_archive,manager_name) " +
-                "VALUES(?1, ?2, 123, ?4, ?5, 'apprenti', 1, ?8, ?9, ?10, 0, ?11)");
+        Query q = prepareQuery(user, connectedId);
+        q.executeUpdate();
+        em.getTransaction().commit();
+    }
+
+    private Query prepareQuery(UserEntity user, int connectedId) {
+        Query q = em.createNativeQuery(
+                "INSERT INTO user(last_name, first_name, mdp, phone, mail, type,is_active, company_id, " +
+                        "program_id, related_user_id, is_archive, manager_name) " +
+                "VALUES(?1, ?2, 123, ?4, ?5, ?6, 1, ?8, ?9, ?10, 0, ?11)"
+        );
         q.setParameter(1, user.getLastName());
         q.setParameter(2, user.getFirstName());
         q.setParameter(4, user.getPhone());
         q.setParameter(5, user.getMail());
+        q.setParameter(6, TYPE_APPRENTICE);
         q.setParameter(8, user.getCompanyId());
         q.setParameter(9, user.getProgramId());
         q.setParameter(10, connectedId);
         q.setParameter(11, user.getManagerName());
-        q.executeUpdate();
-        em.getTransaction().commit();
+        return q;
     }
-    public void modifierUSer(int userId, int tuteurId, HttpServletRequest request) {
-        String champLastname = request.getParameter("champLastname");
-        String champFirstname = request.getParameter("champFirstname");
-        String champMail = request.getParameter("champMail");
-        String champPassword = request.getParameter("champPassword");
-        String champPhone = request.getParameter("champPhone");
-        String champCompany = request.getParameter("champCompany");
-        String champProgram = request.getParameter("champProgram");
-        UserEntity user = new UserEntity((short)userId, champLastname, champFirstname, champPassword, champMail, champPhone, Integer.parseInt(champCompany), Integer.parseInt(champProgram), tuteurId);
-        user.setManagerName(request.getParameter("champManagerName"));
+
+    public void modifierUSer(UserEntity user) {
         em.getTransaction().begin();
         em.merge(user);
         em.getTransaction().commit();

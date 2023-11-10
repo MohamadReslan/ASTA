@@ -1,38 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-        <meta charset="UTF-8">
-        <title>Détails de l'apprenti</title>
-        <script src="javascript/details.js"></script>
-    </head>
-    <body>
-        <nav class="navbar navbar-expand-lg bg-primary-subtle" style="background-color: darkblue;">
-            <form method="post" action="user-controller" style="width: 100%; margin: 0;">
-                <div class="container-fluid d-flex">
-                    <a class="navbar-brand" style="display: flex;gap:4px;flex-wrap: nowrap"><h5 style="background-color: white;color: darkblue;border-radius: 2px;padding:4px 4px 0 4px;margin: 0;">APPRENTICESHIP</h5><h5 style="color: white;margin-top: 4px;">APPLICATION</h5></a>
-                    <div class="collapse navbar-collapse" id="navbarNav">
-                        <ul class="navbar-nav">
-                            <li class="nav-item">
-                                <button name="action" value="Home" class="nav-link btn btn-link" style="color: white;margin: 0;">Accueil</button>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="d-flex" style="display: flex;gap:8px; align-items: center">
-                        <button type="submit" name="action" value="Déconnexion" class="btn btn-outline-danger">Déconnexion</button>
-                    </div>
-                </div>
-            </form>
-        </nav>
-        <div class="d-flex flex-column align-items-center" style="background-color: #508bfc;width: 100%;height: 630px">
-            <h1 id="title" class="d-flex m-3"></h1>
-            <div class="container py-3 h-100">
-                <div class="row d-flex justify-content-center align-items-center h-100">
-                    <div class="card shadow-2-strong d-flex" style="border-radius: 1rem;width: 800px; height: 100%">
-                        <div id="content" class="col justify-content-center p-5 text-center"></div>
-                    </div>
-                </div>
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" rel="stylesheet"
+          id="bootstrap-css">
+    <meta charset="UTF-8">
+    <title>Détails de l'apprenti</title>
+    <script src="javascript/details.js"></script>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg bg-primary-subtle" style="background-color: darkblue;">
+    <form method="post" action="user-controller" style="width: 100%; margin: 0;">
+        <div class="container-fluid d-flex">
+            <a class="navbar-brand" style="display: flex;gap:4px;flex-wrap: nowrap">
+                <h5 style="background-color: white;color: darkblue;border-radius: 2px;padding:4px 4px 0 4px;margin: 0;">
+                    APPRENTICESHIP
+                </h5>
+                <h5 style="color: white;margin-top: 4px;">
+                    APPLICATION
+                </h5>
+            </a>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <button name="action"
+                                value="Home"
+                                class="nav-link btn btn-link"
+                                style="color: white;margin: 0;"
+                        >
+                            Accueil
+                        </button>
+                    </li>
+                </ul>
+            </div>
+            <div class="d-flex" style="display: flex;gap:8px; align-items: center">
+                <button type="submit" name="action" value="Déconnexion" class="btn btn-outline-danger">
+                    Déconnexion
+                </button>
             </div>
         </div>
-    </body>
+    </form>
+</nav>
+<div class="d-flex flex-column align-items-center" style="background-color: #508bfc;width: 100%;height: 630px">
+    <h1 id="title" class="d-flex m-3"></h1>
+    <div class="container py-3 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="card shadow-2-strong d-flex" style="border-radius: 1rem;width: 800px; height: 100%">
+                <div id="content" class="col justify-content-center p-5 text-center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
 </html>

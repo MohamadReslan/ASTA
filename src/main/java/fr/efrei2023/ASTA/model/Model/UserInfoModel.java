@@ -1,6 +1,5 @@
 package fr.efrei2023.ASTA.model.Model;
 
-import fr.efrei2023.ASTA.model.bean.User;
 import fr.efrei2023.ASTA.model.entity.MissionEntity;
 import fr.efrei2023.ASTA.model.entity.UserEntity;
 
@@ -35,10 +34,6 @@ public class UserInfoModel {
         return lastName;
     }
 
-    public String getFirstName() {
-        return firstName;
-    }
-
     public String getPhone() {
         return phone;
     }
@@ -47,20 +42,5 @@ public class UserInfoModel {
         return mail;
     }
 
-    public String getManagerName() {
-        return managerName;
-    }
-
-    public String getCompanyName() {
-        return companyName;
-    }
-
-    public String getProgramName() {
-        return programName;
-    }
-
-    public MissionEntity getMission() {
-        return mission;
-    }
 }
 

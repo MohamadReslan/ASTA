@@ -40,12 +40,12 @@ public class UserController extends HttpServlet {
                 moveToNextPage(request, response);
                 break;
             case ACTION_ARCHIVER:
-                userSessionBean.updateUserArchive(Integer.parseInt(request.getParameter("userId")));
+                userSessionBean.updateUserArchive(Integer.parseInt(request.getParameter(FIELD_USER_ID)));
                 request.getSession().setAttribute("allUsers", userSessionBean.getAllRelatedUsersByUser(userConnected.getId()));
                 request.getRequestDispatcher(PAGE_ALL_USERS).forward(request, response);
                 break;
             case ACTION_DETAIL:
-                request.getSession().setAttribute("apprenticeSelected", request.getParameter("userId"));
+                request.getSession().setAttribute("apprenticeSelected", request.getParameter(FIELD_USER_ID));
                 request.getRequestDispatcher("html/details.html").forward(request, response);
                 break;
             case ACTION_APPRENTICE_ARCHIVER:
@@ -59,6 +59,7 @@ public class UserController extends HttpServlet {
                 break;
             case ACTION_AJOUTER:
                 settingInfosOfAllCompaniesAndPrograms(request);
+                request.getSession().setAttribute("errorMessage", "");
                 request.getRequestDispatcher(PAGE_ADD_USER).forward(request, response);
                 break;
             case ACTION_AJOUTER_APPRENTI:
@@ -70,9 +71,9 @@ public class UserController extends HttpServlet {
                 break;
 
             case ACTION_MODIFICATION:
-
-                userSessionBean.modifierUSer(Integer.parseInt(request.getParameter("userId")), userConnected.getId(), request);
-
+                UserEntity userEntity = getNewUserWithRequest(request);
+                userEntity.setRelatedUserId((int) userConnected.getId());
+                userSessionBean.modifierUSer(userEntity);
                 List<UserEntity> allUsers = userSessionBean.getAllRelatedUsersByUser(userConnected.getId());
                 request.setAttribute("allUsers", allUsers);
                 request.getRequestDispatcher(PAGE_ALL_USERS).forward(request, response);
@@ -80,7 +81,7 @@ public class UserController extends HttpServlet {
 
             case ACTION_PAGE_MODIFIER:
 
-                apprentice = userSessionBean.getUserById(Integer.parseInt(request.getParameter("userId")));
+                apprentice = userSessionBean.getUserById(Integer.parseInt(request.getParameter(FIELD_USER_ID)));
                 request.setAttribute("apprentice", apprentice);
                 settingInfosOfAllCompaniesAndPrograms(request);
                 request.getRequestDispatcher(PAGE_MODIFICATION_USER).forward(request, response);
@@ -117,13 +118,22 @@ public class UserController extends HttpServlet {
 
     private UserEntity getNewUserWithRequest(HttpServletRequest request) {
         UserEntity userEntity = new UserEntity();
-        userEntity.setLastName(request.getParameter("lastname"));
-        userEntity.setFirstName(request.getParameter("name"));
-        userEntity.setPhone(request.getParameter("phone"));
-        userEntity.setManagerName(request.getParameter("manager"));
-        userEntity.setMail(request.getParameter(FIELD_MAIL));
-        userEntity.setProgramId(Integer.valueOf(request.getParameter("selectPrograms")));
-        userEntity.setCompanyId(Integer.valueOf(request.getParameter("selectCompanies")));
+        userEntity.setType(TYPE_APPRENTICE);
+        userEntity.setArchive(false);
+        userEntity.setActive(true);
+        userEntity.setLastName(request.getParameter(FIELD_LASTNAME));
+        userEntity.setFirstName(request.getParameter(FIELD_FIRSTNAME));
+        userEntity.setPhone(request.getParameter(FIELD_PHONE));
+        userEntity.setManagerName(request.getParameter(FIELD_MANAGER_NAME));
+        userEntity.setMail(request.getParameter(FIELD_EMAIL));
+        userEntity.setProgramId(Integer.valueOf(request.getParameter(FIELD_PROGRAM)));
+        userEntity.setCompanyId(Integer.valueOf(request.getParameter(FIELD_COMPANY)));
+        String pwd = request.getParameter(FIELD_PWD);
+        String userId = request.getParameter(FIELD_USER_ID);
+        if (pwd != null)
+            userEntity.setMdp(pwd);
+        if (userId != null)
+            userEntity.setId(Short.parseShort(userId));
         return userEntity;
     }
 
@@ -135,7 +145,6 @@ public class UserController extends HttpServlet {
             } else {
                 UserInfoModel userInfoModel = userSessionBean.getUserInfo(userConnected.getId());
                 request.getSession().setAttribute("userInfo", userInfoModel);
-                request.getSession().setAttribute("last", userInfoModel.lastName);
                 request.getRequestDispatcher("userInfo.jsp").forward(request, response);
             }
         } else {
@@ -151,7 +160,7 @@ public class UserController extends HttpServlet {
 
     private boolean isAnotherUserUsingSameMail(HttpServletRequest request) {
         for (UserEntity user : userSessionBean.getAllUsers()) {
-            if (user.getMail().equalsIgnoreCase(request.getParameter(FIELD_MAIL)))
+            if (user.getMail().equalsIgnoreCase(request.getParameter(FIELD_EMAIL)))
                 return true;
         }
         return false;
