@@ -74,8 +74,7 @@ public class UserController extends HttpServlet {
                 UserEntity userEntity = getNewUserWithRequest(request);
                 userEntity.setRelatedUserId((int) userConnected.getId());
                 userSessionBean.modifierUSer(userEntity);
-                List<UserEntity> allUsers = userSessionBean.getAllRelatedUsersByUser(userConnected.getId());
-                request.setAttribute("allUsers", allUsers);
+                request.setAttribute("allUsers", userSessionBean.getAllRelatedUsersByUser(userConnected.getId()));
                 request.getRequestDispatcher(PAGE_ALL_USERS).forward(request, response);
                 break;
 
