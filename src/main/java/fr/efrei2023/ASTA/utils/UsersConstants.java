@@ -26,10 +26,10 @@ public class UsersConstants {
     public static final String ERROR_MESSAGE_CREDENTIALS_KO = "Infos de connexion non valides. Merci de les saisir à nouveau";
     public static final String ERROR_MESSAGE_USER_DUPLICATED = "Mail déjà existant. Merci de saisir un autre mail";
     public static final String PAGE_INDEX = "index.jsp";
-    public static final String PAGE_ALL_USERS = "userList.jsp";
-    public static final String PAGE_ADD_USER = "userAdd.jsp";
-    public static final String PAGE_ARCHIVED_USER = "userArchived.jsp";
+    public static final String PAGE_ALL_USERS = "WEB-INF/home.jsp";
+    public static final String PAGE_ADD_USER = "WEB-INF/userAdd.jsp";
+    public static final String PAGE_ARCHIVED_USER = "WEB-INF/userArchived.jsp";
+    public static final String PAGE_MODIFICATION_USER = "WEB-INF/userModification.jsp";
     public static final String FORM_USER_CONTROLLER = "user-controller";
-    public static final String PAGE_MODIFICATION_USER = "userModification.jsp";
 
 }

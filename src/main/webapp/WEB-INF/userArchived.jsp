@@ -1,4 +1,5 @@
 <%@ include file="dependancies.jsp" %>
+<%@ include file="./components/navbar.jsp" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <html>

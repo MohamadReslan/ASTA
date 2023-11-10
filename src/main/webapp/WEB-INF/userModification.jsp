@@ -1,5 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ include file="dependancies.jsp" %>
+<%@ include file="./components/navbar.jsp" %>
+
 <html>
 <head>
     <title>Modifier Apprenti</title>

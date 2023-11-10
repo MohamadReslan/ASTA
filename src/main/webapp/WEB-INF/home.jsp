@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ include file="dependancies.jsp" %>
+<%@ include file="./components/navbar.jsp" %>
 <%@ page import="fr.efrei2023.ASTA.utils.UsersConstants" %>
 
 <html>
