@@ -62,7 +62,7 @@
                                         <button class="archive-button btn btn-primary"
                                                 type="submit"
                                                 name="action"
-                                                value="<%= UsersConstants.ACTION_ARCHIVER %>"
+                                                value="<%= UsersConstants.ACTION_ARCHIVE %>"
                                                 data-userid="${user.id}"
                                         >
                                             Archiver
@@ -77,7 +77,7 @@
                                         <button class="btn btn-primary"
                                                 type="submit"
                                                 name="action"
-                                                value="<%= UsersConstants.ACTION_PAGE_MODIFIER %>"
+                                                value="<%= UsersConstants.ACTION_GO_TO_PAGE_MODIFY %>"
                                                 data-userid="${user.id}"
                                         >
                                             Modifier

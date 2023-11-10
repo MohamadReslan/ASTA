@@ -15,11 +15,6 @@ public class MissionSessionBean {
     EntityManagerFactory entityManagerFactory = EntityManagerFactoryUtil.getEntityManagerFactory();
     EntityManager em = entityManagerFactory.createEntityManager();
 
-    public List<MissionEntity> getAllMissions(){
-        Query q = em.createQuery("select m from MissionEntity m");
-        return  q.getResultList();
-    }
-
     public MissionEntity getMissionByUserId(int userId) {
         try{
             Query q = em.createQuery("SELECT m FROM MissionEntity m WHERE m.userId = :userId").setParameter("userId", userId);

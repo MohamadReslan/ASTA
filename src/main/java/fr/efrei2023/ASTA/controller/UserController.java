@@ -39,7 +39,7 @@ public class UserController extends HttpServlet {
                 updatedUserConnected(request);
                 moveToNextPage(request, response);
                 break;
-            case ACTION_ARCHIVER:
+            case ACTION_ARCHIVE:
                 userSessionBean.updateUserArchive(Integer.parseInt(request.getParameter(FIELD_USER_ID)),true);
                 request.getSession().setAttribute("allUsers", userSessionBean.getAllRelatedUsersByUser(userConnected.getId()));
                 request.getRequestDispatcher(PAGE_ALL_USERS).forward(request, response);
@@ -48,7 +48,7 @@ public class UserController extends HttpServlet {
                 request.getSession().setAttribute("apprenticeSelected", request.getParameter(FIELD_USER_ID));
                 request.getRequestDispatcher("html/details.html").forward(request, response);
                 break;
-            case ACTION_APPRENTICE_ARCHIVER:
+            case ACTION_APPRENTICE_ARCHIVE:
                 request.getSession().setAttribute("userConnected", userConnected);
                 request.getSession().setAttribute("allArchivedUsers", userSessionBean.getAllArchivedUsers());
                 request.getRequestDispatcher(PAGE_ARCHIVED_USER).forward(request, response);
@@ -57,12 +57,12 @@ public class UserController extends HttpServlet {
                 settingInfosOfAllUsersAndUserConnected(request);
                 request.getRequestDispatcher(PAGE_ALL_USERS).forward(request, response);
                 break;
-            case ACTION_AJOUTER:
+            case ACTION_ADD:
                 settingInfosOfAllCompaniesAndPrograms(request);
                 request.getSession().setAttribute("errorMessage", "");
                 request.getRequestDispatcher(PAGE_ADD_USER).forward(request, response);
                 break;
-            case ACTION_AJOUTER_APPRENTI:
+            case ACTION_ADD_APPRENTICE:
                 if (!isAnotherUserUsingSameMail(request))
                     moveToPage(PAGE_ALL_USERS, request, response);
                 else{
@@ -78,7 +78,7 @@ public class UserController extends HttpServlet {
                 request.getRequestDispatcher(PAGE_ALL_USERS).forward(request, response);
                 break;
 
-            case ACTION_PAGE_MODIFIER:
+            case ACTION_GO_TO_PAGE_MODIFY:
 
                 apprentice = userSessionBean.getUserById(Integer.parseInt(request.getParameter(FIELD_USER_ID)));
                 request.setAttribute("apprentice", apprentice);
@@ -148,9 +148,8 @@ public class UserController extends HttpServlet {
                 settingInfosOfAllUsersAndUserConnected(request);
                 request.getRequestDispatcher(PAGE_ALL_USERS).forward(request, response);
             } else {
-                UserInfoModel userInfoModel = userSessionBean.getUserInfo(userConnected.getId());
-                request.getSession().setAttribute("userInfo", userInfoModel);
-                request.getRequestDispatcher("userInfo.jsp").forward(request, response);
+                request.getSession().setAttribute("userInfo", userSessionBean.getUserInfo(userConnected.getId()));
+                request.getRequestDispatcher(PAGE_USER_INFO).forward(request, response);
             }
         } else {
             request.getSession().setAttribute("errorMessage", ERROR_MESSAGE_CREDENTIALS_KO);

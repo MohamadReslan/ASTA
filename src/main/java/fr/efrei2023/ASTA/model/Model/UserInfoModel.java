@@ -34,6 +34,10 @@ public class UserInfoModel {
         return lastName;
     }
 
+    public String getFirstName() {
+        return firstName;
+    }
+
     public String getPhone() {
         return phone;
     }
@@ -42,5 +46,19 @@ public class UserInfoModel {
         return mail;
     }
 
-}
+    public String getManagerName() {
+        return managerName;
+    }
 
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    public String getProgramName() {
+        return programName;
+    }
+
+    public MissionEntity getMission() {
+        return mission;
+    }
+}

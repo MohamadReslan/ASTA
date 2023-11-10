@@ -50,7 +50,7 @@
                   </select>
                 </div>
 
-                <input type="submit" name="action" value="<%= UsersConstants.ACTION_AJOUTER_APPRENTI %>"
+                <input type="submit" name="action" value="<%= UsersConstants.ACTION_ADD_APPRENTICE %>"
                        class="btn btn-primary"/>
                 <div style="color:red">
                   ${errorMessage}

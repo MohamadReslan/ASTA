@@ -25,16 +25,16 @@
             </button>
           </li>
           <li class="nav-item">
-            <button name="action" value="<%= UsersConstants.ACTION_APPRENTICE_ARCHIVER %>"
+            <button name="action" value="<%= UsersConstants.ACTION_APPRENTICE_ARCHIVE %>"
                     class="nav-link btn btn-link"
                     style="color: white;margin: 0;">
-              Utilisateurs Archivés
+              Apprentis archivés
             </button>
           </li>
           <li class="nav-item">
-            <button name="action" value="<%= UsersConstants.ACTION_AJOUTER %>" class="nav-link btn btn-link"
+            <button name="action" value="<%= UsersConstants.ACTION_ADD %>" class="nav-link btn btn-link"
                     style="color: white;margin: 0;">
-              Ajout d'utilisateur
+              Ajout d'apprenti
             </button>
           </li>
         </ul>
