@@ -1,25 +1,20 @@
 package fr.efrei2023.ASTA.controller;
 
-import fr.efrei2023.ASTA.model.entity.CompanyEntity;
-import fr.efrei2023.ASTA.model.entity.ProgramEntity;
 import fr.efrei2023.ASTA.model.entity.UserEntity;
 import fr.efrei2023.ASTA.model.sessionbean.CompanySessionBean;
 import fr.efrei2023.ASTA.model.sessionbean.ProgramSessionBean;
 import fr.efrei2023.ASTA.model.sessionbean.UserSessionBean;
 import jakarta.ejb.EJB;
-import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Objects;
 
-import static fr.efrei2023.ASTA.utils.UsersConstantes.*;
+import static fr.efrei2023.ASTA.utils.UsersConstants.*;
 
 @WebServlet("user-controller")
 public class UserController extends HttpServlet {
@@ -30,6 +25,7 @@ public class UserController extends HttpServlet {
     @EJB
     private ProgramSessionBean programSessionBean;
     private UserEntity userConnected;
+    private UserEntity apprentice;
 
     public UserController() {
     }
@@ -46,6 +42,10 @@ public class UserController extends HttpServlet {
                 userSessionBean.updateUserArchive(Integer.parseInt(request.getParameter("userId")));
                 request.getSession().setAttribute("allUsers", userSessionBean.getAllRelatedUsersByUser(userConnected.getId()));
                 request.getRequestDispatcher(PAGE_ALL_USERS).forward(request, response);
+                break;
+            case ACTION_DETAIL:
+                request.getSession().setAttribute("apprenticeSelected", request.getParameter("userId"));
+                request.getRequestDispatcher("html/details.html").forward(request, response);
                 break;
             case ACTION_APPRENTICE_ARCHIVER:
                 request.getSession().setAttribute("userConnected", userConnected);
@@ -67,6 +67,24 @@ public class UserController extends HttpServlet {
                     moveToPage(PAGE_ADD_USER, request, response);
                 }
                 break;
+
+            case ACTION_MODIFICATION:
+
+                userSessionBean.modifierUSer(Integer.parseInt(request.getParameter("userId")),request);
+
+                List<UserEntity> allUsers = userSessionBean.getAllRelatedUsersByUser(userConnected.getId());
+                request.setAttribute("allUsers", allUsers);
+                request.getRequestDispatcher(PAGE_ALL_USERS).forward(request, response);
+                break;
+
+            case ACTION_PAGE_MODIFIER:
+
+                apprentice = userSessionBean.getUserById(Integer.parseInt(request.getParameter("userId")));
+                request.setAttribute("apprentice", apprentice);
+                settingInfosOfAllCompaniesAndPrograms(request);
+                request.getRequestDispatcher(PAGE_MODIFICATION_USER).forward(request, response);
+                break;
+
             default:
                 request.getSession().setAttribute("errorMessage", "");
                 request.getRequestDispatcher(PAGE_INDEX).forward(request, response);
@@ -81,7 +99,8 @@ public class UserController extends HttpServlet {
     private void moveToPage(String page, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         switch (page) {
             case PAGE_ALL_USERS:
-                userSessionBean.createNewUser(request, userConnected.getId());
+                UserEntity userEntity = getNewUserWithRequest(request);
+                userSessionBean.createNewUser(userEntity, userConnected.getId());
                 settingInfosOfAllUsersAndUserConnected(request);
                 request.getRequestDispatcher(page).forward(request, response);
                 break;
@@ -93,6 +112,18 @@ public class UserController extends HttpServlet {
             default:
 
         }
+    }
+
+    private UserEntity getNewUserWithRequest(HttpServletRequest request) {
+        UserEntity userEntity = new UserEntity();
+        userEntity.setLastName(request.getParameter("lastname"));
+        userEntity.setFirstName(request.getParameter("name"));
+        userEntity.setPhone(request.getParameter("phone"));
+        userEntity.setManagerName(request.getParameter("manager"));
+        userEntity.setMail(request.getParameter(FIELD_MAIL));
+        userEntity.setProgramId(Integer.valueOf(request.getParameter("selectPrograms")));
+        userEntity.setCompanyId(Integer.valueOf(request.getParameter("selectCompanies")));
+        return userEntity;
     }
 
     private void moveToNextPage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

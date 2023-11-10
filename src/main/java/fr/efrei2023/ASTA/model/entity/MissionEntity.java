@@ -19,8 +19,8 @@ public class MissionEntity {
     @Column(name = "comment")
     private String comment;
     @Basic
-    @Column(name = "id_1")
-    private short id1;
+    @Column(name = "userId")
+    private short userId;
 
     public int getId() {
         return id;
@@ -55,11 +55,11 @@ public class MissionEntity {
     }
 
     public short getId1() {
-        return id1;
+        return userId;
     }
 
-    public void setId1(short id1) {
-        this.id1 = id1;
+    public void setId1(short userId) {
+        this.userId = userId;
     }
 
     @Override
@@ -70,7 +70,7 @@ public class MissionEntity {
         MissionEntity that = (MissionEntity) o;
 
         if (id != that.id) return false;
-        if (id1 != that.id1) return false;
+        if (userId != that.userId) return false;
         if (keyword != null ? !keyword.equals(that.keyword) : that.keyword != null) return false;
         if (job != null ? !job.equals(that.job) : that.job != null) return false;
         if (comment != null ? !comment.equals(that.comment) : that.comment != null) return false;
@@ -84,7 +84,7 @@ public class MissionEntity {
         result = 31 * result + (keyword != null ? keyword.hashCode() : 0);
         result = 31 * result + (job != null ? job.hashCode() : 0);
         result = 31 * result + (comment != null ? comment.hashCode() : 0);
-        result = 31 * result + (int) id1;
+        result = 31 * result + (int) userId;
         return result;
     }
 }

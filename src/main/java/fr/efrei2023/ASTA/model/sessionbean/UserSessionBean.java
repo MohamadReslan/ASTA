@@ -1,8 +1,12 @@
 package fr.efrei2023.ASTA.model.sessionbean;
 
-import fr.efrei2023.ASTA.model.bean.User;
+import fr.efrei2023.ASTA.model.Model.UserInfoModel;
+import fr.efrei2023.ASTA.model.entity.CompanyEntity;
+import fr.efrei2023.ASTA.model.entity.MissionEntity;
+import fr.efrei2023.ASTA.model.entity.ProgramEntity;
 import fr.efrei2023.ASTA.model.entity.UserEntity;
 import fr.efrei2023.ASTA.utils.EntityManagerFactoryUtil;
+import jakarta.ejb.EJB;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
@@ -10,14 +14,23 @@ import jakarta.persistence.NoResultException;
 import jakarta.persistence.Query;
 import jakarta.servlet.http.HttpServletRequest;
 
+import javax.swing.*;
 import java.util.List;
 
-import static fr.efrei2023.ASTA.utils.UsersConstantes.FIELD_MAIL;
+import static fr.efrei2023.ASTA.utils.UsersConstants.FIELD_MAIL;
 
 @Stateless
 public class UserSessionBean {
     EntityManagerFactory entityManagerFactory = EntityManagerFactoryUtil.getEntityManagerFactory();
     EntityManager em = entityManagerFactory.createEntityManager();
+
+    @EJB
+    private CompanySessionBean companySessionBean;
+
+    @EJB
+    private ProgramSessionBean programSessionBean;
+    @EJB
+    private MissionSessionBean missionSessionBean;
 
     public List<UserEntity> getAllUsers() {
         return em.createQuery("SELECT u from UserEntity u").getResultList();
@@ -42,6 +55,14 @@ public class UserSessionBean {
         return (UserEntity) q.getSingleResult();
     }
 
+    public UserInfoModel getUserInfo(int userId) {
+        UserEntity user = getUserById(userId);
+        CompanyEntity company = companySessionBean.getCompanyById(user.getCompanyId());
+        ProgramEntity program = programSessionBean.getProgramById(user.getProgramId());
+        MissionEntity mission = missionSessionBean.getMissionByUserId(user.getId());
+        return new UserInfoModel(user, company.getName(), program.getLabel(), mission);
+    }
+
     public void updateUserArchive(int userId) {
         em.getTransaction().begin();
         UserEntity user = em.find(UserEntity.class, (short) userId);
@@ -56,23 +77,46 @@ public class UserSessionBean {
         return q.getResultList();
     }
 
-    public void createNewUser(HttpServletRequest request, int connectedId) {
-        String lastname = request.getParameter("lastname");
-        String name = request.getParameter("name");
-        String phone = request.getParameter("phone");
-        String email = request.getParameter(FIELD_MAIL);
-        String programId = request.getParameter("selectPrograms");
-        String companyId = request.getParameter("selectCompanies");
+    public void createNewUser(UserEntity user, int connectedId) {
         em.getTransaction().begin();
-        Query q = em.createNativeQuery("INSERT INTO user(last_name, first_name,mdp,phone,mail,type,is_active,company_id,program_id,related_user_id,is_archive) " +
-                "VALUES(?1, ?2, 123, ?4, ?5, 'apprenti', 1, ?8, ?9, ?10, 0)");
-        q.setParameter(1, lastname);
-        q.setParameter(2, name);
-        q.setParameter(4, phone);
-        q.setParameter(5, email);
-        q.setParameter(8, companyId);
-        q.setParameter(9, programId);
+        Query q = em.createNativeQuery("INSERT INTO user(last_name, first_name,mdp,phone,mail,type,is_active,company_id,program_id,related_user_id,is_archive,manager_name) " +
+                "VALUES(?1, ?2, 123, ?4, ?5, 'apprenti', 1, ?8, ?9, ?10, 0, ?11)");
+        q.setParameter(1, user.getLastName());
+        q.setParameter(2, user.getFirstName());
+        q.setParameter(4, user.getPhone());
+        q.setParameter(5, user.getMail());
+        q.setParameter(8, user.getCompanyId());
+        q.setParameter(9, user.getProgramId());
         q.setParameter(10, connectedId);
+        q.setParameter(11, user.getManagerName());
+        q.executeUpdate();
+        em.getTransaction().commit();
+    }
+    public void modifierUSer(int userId, HttpServletRequest request) {
+
+        String champLastname = request.getParameter("champLastname");
+        String champFirstname = request.getParameter("champFirstname");
+        String champMail = request.getParameter("champMail");
+        String champPassword = request.getParameter("champPassword");
+        String champPhone = request.getParameter("champPhone");
+        String champCompany = request.getParameter("champCompany");
+        String champProgram = request.getParameter("champProgram");
+        em.getTransaction().begin();
+        Query q = em.createQuery("UPDATE UserEntity SET lastName=:lastname," +
+                        "firstName=:firstname," +
+                        "mail=:mail, " +
+                        "mdp=:mdp, "  +
+                        "phone=:phone," +
+                        "companyId=:companyId," +
+                        "programId=:programId WHERE UserEntity.id = :id ")
+                .setParameter("lastname", champLastname)
+                .setParameter("firstname", champFirstname)
+                .setParameter("mail",champMail)
+                .setParameter("mdp",champPassword)
+                .setParameter("phone", champPhone)
+                .setParameter("companyId",Integer.parseInt(champCompany))
+                .setParameter("programId", Integer.parseInt(champProgram))
+                .setParameter("id",userId);
         q.executeUpdate();
         em.getTransaction().commit();
     }

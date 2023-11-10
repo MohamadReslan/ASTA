@@ -1,13 +1,16 @@
 package fr.efrei2023.ASTA.utils;
 
-public class UsersConstantes {
+public class UsersConstants {
     public static final String ACTION = "action";
+    public static final String ACTION_DETAIL = "Detail";
     public static final String ACTION_LOGIN = "Login";
     public static final String ACTION_AJOUTER = "Ajouter";
     public static final String ACTION_HOME = "Home";
     public static final String ACTION_ARCHIVER = "Archiver";
     public static final String ACTION_APPRENTICE_ARCHIVER = "Apprentis archives";
     public static final String ACTION_AJOUTER_APPRENTI = "Ajouter l'apprenti";
+    public static final String ACTION_MODIFICATION = "modification";
+    public static final String ACTION_PAGE_MODIFIER ="modifier";
     public static final String FIELD_LOGIN = "loginField";
     public static final String FIELD_PWD = "pwdField";
     public static final String FIELD_MAIL = "email";
@@ -18,4 +21,6 @@ public class UsersConstantes {
     public static final String PAGE_ALL_USERS = "userList.jsp";
     public static final String PAGE_ADD_USER = "userAdd.jsp";
     public static final String PAGE_ARCHIVED_USER = "userArchived.jsp";
+    public static final String FORM_USER_CONTROLLER = "user-controller";
+    public static final String PAGE_MODIFICATION_USER = "userModification.jsp";
 }
