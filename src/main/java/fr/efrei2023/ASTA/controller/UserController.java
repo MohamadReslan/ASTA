@@ -40,7 +40,7 @@ public class UserController extends HttpServlet {
                 moveToNextPage(request, response);
                 break;
             case ACTION_ARCHIVER:
-                userSessionBean.updateUserArchive(Integer.parseInt(request.getParameter(FIELD_USER_ID)));
+                userSessionBean.updateUserArchive(Integer.parseInt(request.getParameter(FIELD_USER_ID)),true);
                 request.getSession().setAttribute("allUsers", userSessionBean.getAllRelatedUsersByUser(userConnected.getId()));
                 request.getRequestDispatcher(PAGE_ALL_USERS).forward(request, response);
                 break;
@@ -84,6 +84,12 @@ public class UserController extends HttpServlet {
                 request.setAttribute("apprentice", apprentice);
                 settingInfosOfAllCompaniesAndPrograms(request);
                 request.getRequestDispatcher(PAGE_MODIFICATION_USER).forward(request, response);
+                break;
+
+            case ACTION_UNARCHIVE:
+                userSessionBean.updateUserArchive(Integer.parseInt(request.getParameter(FIELD_USER_ID)),false);
+                request.getSession().setAttribute("allUsers", userSessionBean.getAllRelatedUsersByUser(userConnected.getId()));
+                request.getRequestDispatcher(PAGE_ALL_USERS).forward(request, response);
                 break;
 
             default:

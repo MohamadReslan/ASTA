@@ -33,6 +33,7 @@
                 <th data-field="lastName" data-sortable="true">Nom</th>
                 <th data-field="phone">Téléphone</th>
                 <th data-field="mail">Mail</th>
+                <th data-field="action">Action</th>
             </tr>
             </thead>
             <tbody>
@@ -45,6 +46,26 @@
                             <td>${user.lastName}</td>
                             <td>${user.phone}</td>
                             <td>${user.mail}</td>
+                            <td>
+                                <form action="<%= UsersConstants.FORM_USER_CONTROLLER %>"
+                                      method="post"
+                                      id="archive-form"
+                                >
+                                    <input type="hidden"
+                                           id="<%= UsersConstants.FIELD_USER_ID %>"
+                                           name="<%= UsersConstants.FIELD_USER_ID %>"
+                                           value=${user.id}
+                                    >
+                                    <button class="archive-button btn btn-primary"
+                                            type="submit"
+                                            name="action"
+                                            value="<%= UsersConstants.ACTION_UNARCHIVE %>"
+                                            data-userid="${user.id}"
+                                    >
+                                        Désarchiver
+                                    </button>
+                                </form>
+                            </td>
                         </tr>
                     </c:forEach>
                 </c:when>
