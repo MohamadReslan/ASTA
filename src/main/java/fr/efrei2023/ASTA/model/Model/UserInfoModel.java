@@ -4,15 +4,15 @@ import fr.efrei2023.ASTA.model.entity.MissionEntity;
 import fr.efrei2023.ASTA.model.entity.UserEntity;
 
 public class UserInfoModel {
-    public int id;
-    public String lastName;
-    public String firstName;
-    public String phone;
-    public String mail;
-    public String managerName;
-    public String companyName;
-    public String programName;
-    public MissionEntity mission;
+    private int id;
+    private String lastName;
+    private String firstName;
+    private String phone;
+    private String mail;
+    private String managerName;
+    private String companyName;
+    private String programName;
+    private MissionEntity mission;
 
     public UserInfoModel(UserEntity user, String companyName, String programName, MissionEntity mission) {
         this.id = user.getId();
