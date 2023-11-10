@@ -62,11 +62,11 @@ public class UserSessionBean {
         return new UserInfoModel(user, company.getName(), program.getLabel(), mission);
     }
 
-    public void updateUserArchive(int userId) {
+    public void updateUserArchive(int userId,boolean archive) {
         em.getTransaction().begin();
         UserEntity user = em.find(UserEntity.class, (short) userId);
         if (user != null) {
-            user.setArchive(true);
+            user.setArchive(archive);
         }
         em.getTransaction().commit();
     }

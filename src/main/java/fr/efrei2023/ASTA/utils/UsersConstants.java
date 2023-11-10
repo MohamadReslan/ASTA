@@ -9,6 +9,7 @@ public class UsersConstants {
     public static final String ACTION_ARCHIVER = "Archiver";
     public static final String ACTION_APPRENTICE_ARCHIVER = "Apprentis archives";
     public static final String ACTION_AJOUTER_APPRENTI = "Ajouter l'apprenti";
+    public static final String ACTION_UNARCHIVE = "desarchiver";
     public static final String ACTION_MODIFICATION = "modification";
     public static final String ACTION_PAGE_MODIFIER ="modifier";
     public static final String FIELD_USER_ID= "User ID";
