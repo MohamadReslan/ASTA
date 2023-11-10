@@ -26,4 +26,41 @@ public class UserInfoModel {
         this.programName = programName;
         this.mission = mission;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public String getMail() {
+        return mail;
+    }
+
+    public String getManagerName() {
+        return managerName;
+    }
+
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    public String getProgramName() {
+        return programName;
+    }
+
+    public MissionEntity getMission() {
+        return mission;
+    }
 }
+

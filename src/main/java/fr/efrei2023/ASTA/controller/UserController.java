@@ -1,5 +1,6 @@
 package fr.efrei2023.ASTA.controller;
 
+import fr.efrei2023.ASTA.model.Model.UserInfoModel;
 import fr.efrei2023.ASTA.model.entity.UserEntity;
 import fr.efrei2023.ASTA.model.sessionbean.CompanySessionBean;
 import fr.efrei2023.ASTA.model.sessionbean.ProgramSessionBean;
@@ -132,7 +133,9 @@ public class UserController extends HttpServlet {
                 settingInfosOfAllUsersAndUserConnected(request);
                 request.getRequestDispatcher(PAGE_ALL_USERS).forward(request, response);
             } else {
-                request.getSession().setAttribute("userConnected", userSessionBean.getUserById(userConnected.getId()));
+                UserInfoModel userInfoModel = userSessionBean.getUserInfo(userConnected.getId());
+                request.getSession().setAttribute("userInfo", userInfoModel);
+                request.getSession().setAttribute("last", userInfoModel.lastName);
                 request.getRequestDispatcher("userInfo.jsp").forward(request, response);
             }
         } else {
