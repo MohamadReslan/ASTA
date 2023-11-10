@@ -47,6 +47,10 @@
                 <div class="form-group">
                   <input class="form-control" placeholder="Telephone" name="champPhone" value="${apprentice.phone}" type="number">
                 </div>
+                <!--show manager_name !-->
+                <div class="form-group">
+                  <input class="form-control" placeholder="Manager Name" name="champManagerName" value="${apprentice.managerName}" type="text">
+                </div>
                 <!--show company from company id!-->
                 <div class="form-group">
                   <select style="width: 100%" name="champCompany">

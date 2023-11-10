@@ -101,6 +101,7 @@ public class UserSessionBean {
         String champCompany = request.getParameter("champCompany");
         String champProgram = request.getParameter("champProgram");
         UserEntity user = new UserEntity((short)userId, champLastname, champFirstname, champPassword, champMail, champPhone, Integer.parseInt(champCompany), Integer.parseInt(champProgram), tuteurId);
+        user.setManagerName(request.getParameter("champManagerName"));
         em.getTransaction().begin();
         em.merge(user);
         em.getTransaction().commit();
