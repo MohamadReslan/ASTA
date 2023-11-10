@@ -72,8 +72,6 @@
             </c:choose>
             </tbody>
         </table>
-        <input type="submit" name="action" value="<%= UsersConstants.ACTION_AJOUTER %>" class="btn btn-primary"/>
-        <input type="submit" name="action" value="<%= UsersConstants.ACTION_APPRENTICE_ARCHIVER %>" class="btn btn-primary"/>
     </form>
 </div>
 

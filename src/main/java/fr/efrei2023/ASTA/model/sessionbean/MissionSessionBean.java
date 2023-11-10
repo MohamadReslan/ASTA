@@ -5,6 +5,7 @@ import fr.efrei2023.ASTA.utils.EntityManagerFactoryUtil;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.NoResultException;
 import jakarta.persistence.Query;
 
 import java.util.List;
@@ -20,7 +21,11 @@ public class MissionSessionBean {
     }
 
     public MissionEntity getMissionByUserId(int userId) {
-        Query q = em.createQuery("SELECT m FROM MissionEntity m WHERE m.userId = :userId").setParameter("userId", userId);
-        return (MissionEntity) q.getSingleResult();
+        try{
+            Query q = em.createQuery("SELECT m FROM MissionEntity m WHERE m.userId = :userId").setParameter("userId", userId);
+            return (MissionEntity) q.getSingleResult();
+        } catch(NoResultException e) {
+            return null;
+        }
     }
 }

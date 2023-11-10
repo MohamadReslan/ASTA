@@ -2,13 +2,16 @@ fetch('/ASTA/apprentices')
     .then(response => response.json())
     .then(data => {
         console.log(data);
-
-        const divMission =
-            "<div class='input-group'>" +
+        let divMission = "";
+        if (data.mission != null) {
+            divMission =
+                "<div class='input-group'>" +
                 "<span class='input-group-text'>Mission</span>" +
                 "<input type='text' aria-label='First name' class='form-control' value='" + data.mission.job + "'>" +
                 "<input type='text' aria-label='Last name' class='form-control' value='" + data.mission.comment + "' style='width: 50%'>" +
-            "</div>"
+                "</div>";
+        }
+
         const divContent = styleInput("Prénom", data.firstName) + styleInput("Nom", data.lastName) +
             styleInput("Téléphone", data.phone) + styleInput("Mail", data.mail) +
             styleInput("Maitre d'apprentissage", data.managerName) + styleInput("Entreprise", data.companyName) +
