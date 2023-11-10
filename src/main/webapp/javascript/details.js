@@ -3,13 +3,12 @@ fetch('/ASTA/apprentices')
     .then(data => {
         console.log(data);
         let divMission = "";
-        if (data.mission != null) {
+        if (data.mission !== null) {
             divMission =
                 "<div class='input-group'>" +
                 "<span class='input-group-text'>Mission</span>" +
-                "<input type='text' aria-label='First name' class='form-control' value='" + data.mission.job + "'>" +
-                "<input type='text' aria-label='Last name' class='form-control' value='" + data.mission.comment + "' style='width: 50%'>" +
-                "</div>";
+                "<input disabled readonly type='text' style='background-color: white;' class='form-control' placeholder='" + data.mission.job + "'/>" +
+                "<input disabled readonly type='text' class='form-control' placeholder='" + data.mission.comment + "' style='background-color: white;width: 50%'/>" +"</div>";
         }
 
         const divContent = styleInput("Prénom", data.firstName) + styleInput("Nom", data.lastName) +
